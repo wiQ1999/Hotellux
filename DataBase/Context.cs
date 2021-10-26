@@ -1,11 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataBase.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataBase
 {
     public class Context : DbContext
     {
-        //public DbSet<Test1DataModel> Test1 { get; set; }
-        //public DbSet<Test2DataModel> Test2 { get; set; }
+        public DbSet<WorkerDataModel> Workers { get; set; }
+        public DbSet<LoginDataModel> Logins { get; set; }
+        public DbSet<RoomDataModel> Rooms { get; set; }
+        public DbSet<CustomerDataModel> Customers { get; set; }
+        public DbSet<ReservationDataModel> Reservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
