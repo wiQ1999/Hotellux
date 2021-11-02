@@ -10,7 +10,13 @@ namespace DataBase.DataModels
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey(nameof(Customer))]
+        public int CustomerId { get; set; }
+
         public CustomerDataModel Customer { get; set; }
+
+        [ForeignKey(nameof(Room))]
+        public int RoomId { get; set; }
 
         public RoomDataModel Room { get; set; }
 
