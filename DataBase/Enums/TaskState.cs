@@ -2,15 +2,15 @@
 
 namespace DataBase.Enums
 {
-    public enum State
+    public enum TaskState
     {
         [Description("Zakończony")]
-        a,
-        [Description("W realizacji")]
-        b,
+        Complited,
+        [Description("Realizowany")]
+        Realized,
         [Description("Nowy")]
-        c,
+        New,
         [Description("Anulowany")]
-        d,
+        Cancelled,
     }
 }

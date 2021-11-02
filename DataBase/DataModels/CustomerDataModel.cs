@@ -13,7 +13,7 @@ namespace DataBase.DataModels
         public string Name { get; set; }
 
         [Required]
-        public string Surname { get; set; }
+        public string Lastname { get; set; }
 
         public string Email { get; set; }
 
