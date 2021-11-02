@@ -8,8 +8,10 @@ namespace DataBase.DataModels
     {
         [Key]
         public int Id { get; set; }
-        
+
         public WorkerDataModel Worker { get; set; }
+
+        public int WorkerId { get; set; }
 
         [Required]
         public string Login { get; set; }

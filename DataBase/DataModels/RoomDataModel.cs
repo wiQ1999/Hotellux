@@ -11,7 +11,8 @@ namespace DataBase.DataModels
 
         public int Floor { get; set; }
 
-        public int Number { get; set; }
+        [Required]
+        public string Number { get; set; }
 
         public float Size { get; set; }
 
