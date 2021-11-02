@@ -10,11 +10,12 @@ namespace DataBase
         public DbSet<RoomDataModel> Rooms { get; set; }
         public DbSet<CustomerDataModel> Customers { get; set; }
         public DbSet<ReservationDataModel> Reservations { get; set; }
+        public DbSet<CleaningsDataModel> Cleanings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"  
-                Server=localhost;Database=TestDB;Trusted_Connection=True;"
+                Server=localhost;Database=Hotellux;Trusted_Connection=True;"
             );
         }
     }

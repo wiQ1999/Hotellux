@@ -11,23 +11,20 @@ namespace DataBase.DataModels
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public WorkerType WorkerType { get; set; }
-
-        [Required]
         public bool IsActive { get; set; }
+
+        public WorkerType Type { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public string Surname { get; set; }
+        public string Lastname { get; set; }
 
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
-        [Required]
         [Column(TypeName = "Date")]
-        public DateTime DateOfBirdth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public string Email { get; set; }
 

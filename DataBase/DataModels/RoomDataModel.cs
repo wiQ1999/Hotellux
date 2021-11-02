@@ -13,12 +13,13 @@ namespace DataBase.DataModels
 
         public int Number { get; set; }
 
-        public int Capacity { get; set; }
-
         public float Size { get; set; }
 
-        [Required]
-        public double PricePerDay { get; set; }
+        public int Capacity { get; set; }
+
+        public decimal PricePerDay { get; set; }
+
+        public string Description { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }

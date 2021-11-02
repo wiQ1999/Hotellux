@@ -1,0 +1,10 @@
+Potrzebna konfiguracja:
+- podany connection string
+- komendy wpisywane w konsoli mendażera pakietów - można wyszukać w pasku wyszukiwania w środowisku Visual Studio i przełączyć rojekt domyslny na projekt "DataBase".
+
+
+Utworzenie migracji:
+Add-Migration <NAZWA MIGRACJI>
+
+Aktualizacja bazy danych
+Update-Database

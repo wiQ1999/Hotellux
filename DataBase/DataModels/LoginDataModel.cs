@@ -9,11 +9,10 @@ namespace DataBase.DataModels
         [Key]
         public int Id { get; set; }
         
-        [Required]
         public WorkerDataModel Worker { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Login { get; set; }
 
         [Required]
         public string Password { get; set; }
