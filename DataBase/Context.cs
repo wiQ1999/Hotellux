@@ -63,19 +63,19 @@ namespace DataBase
 
             #region Reservations
             modelBuilder.Entity<ReservationDataModel>().HasData(
-                new ReservationDataModel { Id = 1, CustomerId = 1, RoomId = 5, PersonCount = 5, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45) },
-                new ReservationDataModel { Id = 2, CustomerId = 2, RoomId = 1, PersonCount = 1, WithBreakfast = true, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45) },
-                new ReservationDataModel { Id = 3, CustomerId = 3, RoomId = 2, PersonCount = 2, WithBreakfast = true, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45) },
-                new ReservationDataModel { Id = 4, CustomerId = 1, RoomId = 1, PersonCount = 2, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45) },
-                new ReservationDataModel { Id = 5, CustomerId = 4, RoomId = 3, PersonCount = 3, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45) }
+                new ReservationDataModel { Id = 1, CustomerId = 1, RoomId = 5, PersonCount = 5, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45), EndDateReal = new DateTime(2021, 10, 17, 9, 50, 17) },
+                new ReservationDataModel { Id = 2, CustomerId = 2, RoomId = 1, PersonCount = 1, WithBreakfast = true, StartDatePlanned = new DateTime(2021, 10, 15, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 16, 11, 0, 0), StartDateReal = new DateTime(2021, 10, 15, 13, 10, 32), EndDateReal = new DateTime(2021, 10, 16, 11, 12, 36) },
+                new ReservationDataModel { Id = 3, CustomerId = 3, RoomId = 2, PersonCount = 2, WithBreakfast = true, StartDatePlanned = new DateTime(2021, 10, 15, 13, 0, 0), EndDatePlanned = new DateTime(2021, 10, 18, 14, 0, 0), StartDateReal = new DateTime(2021, 10, 15, 12, 11, 42), EndDateReal = new DateTime(2021, 10, 18, 13, 34, 1) },
+                new ReservationDataModel { Id = 4, CustomerId = 1, RoomId = 1, PersonCount = 2, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 17, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 18, 10, 0, 0), StartDateReal = new DateTime(2021, 10, 17, 11, 31, 19), EndDateReal = new DateTime(2021, 10, 18, 10, 8, 59) },
+                new ReservationDataModel { Id = 5, CustomerId = 4, RoomId = 3, PersonCount = 2, WithBreakfast = false, StartDatePlanned = new DateTime(2021, 10, 20, 12, 0, 0), EndDatePlanned = new DateTime(2021, 10, 30, 9, 0, 0), StartDateReal = new DateTime(2021, 10, 20, 14, 55, 4), EndDateReal = new DateTime(2021, 10, 30, 9, 12, 31) }
             );
             #endregion
 
-            //#region Cleanings
-            //modelBuilder.Entity<CleaningsDataModel>().HasData(
-            //    new CleaningsDataModel { Id = 1, State = TaskState.Complited, CreatorId = 2, ExecutorId },
-            //);
-            //#endregion
+            #region Cleanings
+            modelBuilder.Entity<CleaningsDataModel>().HasData(
+                new CleaningsDataModel { Id = 1, State = TaskState.Complited, CreatorId = 2, ExecutorId = 3, RoomId = 5, CreatorDescription = "Opis osoby tworzącej zadanie.", ExecutorDescription = string.Empty, StartDatePlanned = new DateTime(), EndDatePlanned = new DateTime(), StartDateReal = new DateTime(), EndDateReal = new DateTime() },
+            );
+            #endregion
 
         }
     }
