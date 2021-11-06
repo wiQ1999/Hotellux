@@ -33,5 +33,14 @@ namespace DataBase.DataModels
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID {Id} | {Name} | {Lastname} | TYPE {Type}";
+        }
     }
 }
