@@ -41,10 +41,10 @@ namespace DataBase.Migrations
                     b.Property<string>("ExecutorDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ExecutorId")
+                    b.Property<int?>("ExecutorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDatePlanned")
@@ -70,6 +70,81 @@ namespace DataBase.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Cleanings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatorDescription = "Opis osoby tworzącej zadanie.",
+                            CreatorId = 2,
+                            EndDatePlanned = new DateTime(2021, 10, 17, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 17, 11, 50, 17, 0, DateTimeKind.Unspecified),
+                            ExecutorId = 3,
+                            RoomId = 5,
+                            StartDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 17, 9, 50, 17, 0, DateTimeKind.Unspecified),
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatorDescription = "Opis osoby tworzącej zadanie.",
+                            CreatorId = 2,
+                            EndDatePlanned = new DateTime(2021, 10, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 16, 13, 1, 36, 0, DateTimeKind.Unspecified),
+                            ExecutorId = 4,
+                            RoomId = 1,
+                            StartDatePlanned = new DateTime(2021, 10, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 16, 11, 12, 36, 0, DateTimeKind.Unspecified),
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatorDescription = "Opis osoby tworzącej zadanie.",
+                            CreatorId = 2,
+                            EndDatePlanned = new DateTime(2021, 10, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 18, 15, 21, 23, 0, DateTimeKind.Unspecified),
+                            ExecutorDescription = "Pozostawiony bagaż w szafie",
+                            ExecutorId = 3,
+                            RoomId = 2,
+                            StartDatePlanned = new DateTime(2021, 10, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 18, 13, 34, 1, 0, DateTimeKind.Unspecified),
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatorDescription = "Opis osoby tworzącej zadanie.",
+                            CreatorId = 2,
+                            EndDatePlanned = new DateTime(2021, 10, 18, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 18, 12, 1, 43, 0, DateTimeKind.Unspecified),
+                            ExecutorId = 4,
+                            RoomId = 1,
+                            StartDatePlanned = new DateTime(2021, 10, 18, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 18, 10, 8, 59, 0, DateTimeKind.Unspecified),
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatorDescription = "Opis osoby tworzącej zadanie.",
+                            CreatorId = 2,
+                            EndDatePlanned = new DateTime(2021, 10, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExecutorId = 3,
+                            RoomId = 3,
+                            StartDatePlanned = new DateTime(2021, 10, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            State = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatorDescription = "Pranie pościeli.",
+                            CreatorId = 3,
+                            EndDatePlanned = new DateTime(2021, 10, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDatePlanned = new DateTime(2021, 10, 20, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            State = 1
+                        });
                 });
 
             modelBuilder.Entity("DataBase.DataModels.CustomerDataModel", b =>
@@ -243,7 +318,7 @@ namespace DataBase.Migrations
                             Id = 1,
                             CustomerId = 1,
                             EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 17, 9, 50, 17, 0, DateTimeKind.Unspecified),
                             PersonCount = 5,
                             RoomId = 5,
                             StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified),
@@ -254,48 +329,48 @@ namespace DataBase.Migrations
                         {
                             Id = 2,
                             CustomerId = 2,
-                            EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified),
+                            EndDatePlanned = new DateTime(2021, 10, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 16, 11, 12, 36, 0, DateTimeKind.Unspecified),
                             PersonCount = 1,
                             RoomId = 1,
-                            StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified),
+                            StartDatePlanned = new DateTime(2021, 10, 15, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 15, 13, 10, 32, 0, DateTimeKind.Unspecified),
                             WithBreakfast = true
                         },
                         new
                         {
                             Id = 3,
                             CustomerId = 3,
-                            EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified),
+                            EndDatePlanned = new DateTime(2021, 10, 18, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 18, 13, 34, 1, 0, DateTimeKind.Unspecified),
                             PersonCount = 2,
                             RoomId = 2,
-                            StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified),
+                            StartDatePlanned = new DateTime(2021, 10, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 15, 12, 11, 42, 0, DateTimeKind.Unspecified),
                             WithBreakfast = true
                         },
                         new
                         {
                             Id = 4,
                             CustomerId = 1,
-                            EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified),
+                            EndDatePlanned = new DateTime(2021, 10, 18, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 18, 10, 8, 59, 0, DateTimeKind.Unspecified),
                             PersonCount = 2,
                             RoomId = 1,
-                            StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified),
+                            StartDatePlanned = new DateTime(2021, 10, 17, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 17, 11, 31, 19, 0, DateTimeKind.Unspecified),
                             WithBreakfast = false
                         },
                         new
                         {
                             Id = 5,
                             CustomerId = 4,
-                            EndDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDateReal = new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified),
-                            PersonCount = 3,
+                            EndDatePlanned = new DateTime(2021, 10, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDateReal = new DateTime(2021, 10, 30, 9, 12, 31, 0, DateTimeKind.Unspecified),
+                            PersonCount = 2,
                             RoomId = 3,
-                            StartDatePlanned = new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDateReal = new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified),
+                            StartDatePlanned = new DateTime(2021, 10, 20, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDateReal = new DateTime(2021, 10, 20, 14, 55, 4, 0, DateTimeKind.Unspecified),
                             WithBreakfast = false
                         });
                 });
@@ -515,15 +590,11 @@ namespace DataBase.Migrations
 
                     b.HasOne("DataBase.DataModels.WorkerDataModel", "Executor")
                         .WithMany()
-                        .HasForeignKey("ExecutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExecutorId");
 
                     b.HasOne("DataBase.DataModels.RoomDataModel", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("Creator");
 
