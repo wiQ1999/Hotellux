@@ -16,7 +16,7 @@ namespace Hotellux.ViewModels
 
         public TestWorkerViewModel()
         {
-            List<WorkerDataModel> workers = _workerRepository.GetAll();
+            List<WorkerDataModel> workers = _workerRepository.GetAll().ToList();
             Workers = new ObservableCollection<WorkerDataModel>(workers);
         }
 

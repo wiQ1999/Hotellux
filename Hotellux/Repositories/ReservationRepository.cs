@@ -6,32 +6,32 @@ using System.Linq;
 
 namespace Hotellux.Repositories
 {
-    public class WorkerRepository : ICRUD<WorkerDataModel>
+    public class ReservationRepository : ICRUD<ReservationDataModel>
     {
-        public void Create(WorkerDataModel toCreate)
+        public void Create(ReservationDataModel toCreate)
         {
             using var context = new Context();
-            context.Workers.Add(toCreate);
+            context.Reservations.Add(toCreate);
             context.SaveChanges();
         }
 
-        public void Delete(WorkerDataModel toDelete)
+        public void Delete(ReservationDataModel toDelete)
         {
             using var context = new Context();
-            context.Workers.Remove(toDelete);
+            context.Reservations.Add(toDelete);
             context.SaveChanges();
         }
 
-        public IEnumerable<WorkerDataModel> GetAll()
+        public IEnumerable<ReservationDataModel> GetAll()
         {
             using var context = new Context();
-            return context.Workers.AsEnumerable();
+            return context.Reservations.AsEnumerable();
         }
 
-        public void Update(WorkerDataModel toUpdate)
+        public void Update(ReservationDataModel toUpdate)
         {
             using var context = new Context();
-            context.Workers.Update(toUpdate);
+            context.Reservations.Add(toUpdate);
             context.SaveChanges();
         }
     }

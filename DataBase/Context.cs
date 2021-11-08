@@ -54,8 +54,8 @@ namespace DataBase
 
             #region Customers
             modelBuilder.Entity<CustomerDataModel>().HasData(
-                new CustomerDataModel { Id = 1, Name = "Robert", Lastname = "Kozłowski", PhonNumber = "124543996" },
-                new CustomerDataModel { Id = 2, Name = "Maciej", Lastname = "Jeziorek", Email = "maciej.jeziorek@gmail.com", PhonNumber = "124543996" },
+                new CustomerDataModel { Id = 1, Name = "Robert", Lastname = "Kozłowski", PhoneNumber = "124543996" },
+                new CustomerDataModel { Id = 2, Name = "Maciej", Lastname = "Jeziorek", Email = "maciej.jeziorek@gmail.com", PhoneNumber = "124543996" },
                 new CustomerDataModel { Id = 3, Name = "jan", Lastname = "Gitarek" },
                 new CustomerDataModel { Id = 4, Name = "Stean", Lastname = "Bobrowski", Email = "stefan.bobrowski@gmail.com" }
             );
