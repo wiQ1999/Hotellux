@@ -14,12 +14,12 @@ namespace Hotellux
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            MainWindow window = new();
-            window.DataContext = new TestWorkerViewModel();
-            window.Show();
-        }
+        //protected override void OnStartup(StartupEventArgs e)
+        //{
+        //    base.OnStartup(e);
+        //    MainWindow window = new();
+        //    window.DataContext = new TestWorkerViewModel();
+        //    window.Show();
+        //}
     }
 }

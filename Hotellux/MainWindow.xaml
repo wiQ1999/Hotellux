@@ -6,20 +6,19 @@
         xmlns:local="clr-namespace:Hotellux"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
-    
-    
-    <Grid>
 
-        <ListView Name="ListViewProjects" Grid.Column="0" Grid.RowSpan="3" ItemsSource="{Binding}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="{Binding Path=Id}"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+
+
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="69,74,0,0" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="69,104,0,0" Text="{Binding Lastname}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="69,127,0,0" Text="{Binding DateOfBirth, StringFormat='{}{0:MM/dd/yyyy}'}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="150" Margin="250,81,0,0"
+            ItemsSource="{Binding AvaliableWorkerTypes}" 
+            SelectedItem="{Binding WorkerType}"/>
+
+        <Button Content="Button" HorizontalAlignment="Left" Margin="69,165,0,0" VerticalAlignment="Top" Command="{Binding SaveCommand}"/>
 
     </Grid>
 </Window>

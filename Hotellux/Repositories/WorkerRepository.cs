@@ -1,19 +1,44 @@
 ﻿using DataBase;
 using DataBase.DataModels;
-using System;
+using Hotellux.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hotellux.Repositories
 {
-    public class WorkerRepository
+    public class WorkerRepository : IRepository<WorkerDataModel>
     {
+        public void Create(WorkerDataModel toCreate)
+        {
+            using var context = new Context();
+            context.Workers.Add(toCreate);
+            context.SaveChanges();
+        }
+
+        public void Delete(WorkerDataModel toDelete)
+        {
+            using var context = new Context();
+            context.Workers.Remove(toDelete);
+            context.SaveChanges();
+        }
+
         public List<WorkerDataModel> GetAll()
         {
             using var context = new Context();
             return context.Workers.ToList();
+        }
+
+        public void Update(WorkerDataModel toUpdate)
+        {
+            using var context = new Context();
+            context.Workers.Update(toUpdate);
+            context.SaveChanges();
+        }
+
+        IEnumerable<WorkerDataModel> IRepository<WorkerDataModel>.GetAll()
+        {
+            using var context = new Context();
+            return context.Workers.AsEnumerable();
         }
     }
 }
