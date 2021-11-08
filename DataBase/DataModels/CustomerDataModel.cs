@@ -17,7 +17,7 @@ namespace DataBase.DataModels
 
         public string Email { get; set; }
 
-        public string PhonNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
