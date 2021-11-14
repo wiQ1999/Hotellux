@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Hotellux.ViewModels
 {
-    public class WorkerViewModel : INotifyPropertyChanged
+    public class WorkerViewModel : BaseViewModel
     {
         private WorkerDataModel _workerModel;
 
@@ -120,10 +120,6 @@ namespace Hotellux.ViewModels
         private void Save(object obj) => _workerRepository.Create(_workerModel);
 
         private bool CanSave(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && IsOfAge;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     }
 }
