@@ -18,7 +18,7 @@ namespace Hotellux.Repositories
         public void Delete(ReservationDataModel toDelete)
         {
             using var context = new Context();
-            context.Reservations.Add(toDelete);
+            context.Reservations.Remove(toDelete);
             context.SaveChanges();
         }
 
@@ -31,7 +31,7 @@ namespace Hotellux.Repositories
         public void Update(ReservationDataModel toUpdate)
         {
             using var context = new Context();
-            context.Reservations.Add(toUpdate);
+            context.Reservations.Update(toUpdate);
             context.SaveChanges();
         }
     }
