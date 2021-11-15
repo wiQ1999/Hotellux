@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Hotellux.Repositories
 {
-    public class WorkerRepository : ICRUD<WorkerDataModel>
+    public class WorkerRepository //: ICRUD<WorkerDataModel>
     {
         public void Create(WorkerDataModel toCreate)
         {
@@ -22,10 +22,10 @@ namespace Hotellux.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<WorkerDataModel> GetAll()
+        public List<WorkerDataModel> GetAll()
         {
             using var context = new Context();
-            return context.Workers.AsEnumerable();
+            return context.Workers.ToList();
         }
 
         public void Update(WorkerDataModel toUpdate)

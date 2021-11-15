@@ -4,9 +4,7 @@ using Hotellux.Commands;
 using Hotellux.Repositories;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Hotellux.ViewModels
@@ -24,8 +22,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.IsActive;
             set
             {
-                _workerModel.IsActive = value;
-                OnPropertyChanged();
+                if (value != _workerModel.IsActive)
+                {
+                    _workerModel.IsActive = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -36,8 +37,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.Type;
             set
             {
-                _workerModel.Type = value;
-                OnPropertyChanged();
+                if (value != _workerModel.Type)
+                {
+                    _workerModel.Type = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -46,8 +50,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.Name;
             set
             {
-                _workerModel.Name = value;
-                OnPropertyChanged();
+                if (value != _workerModel.Name)
+                {
+                    _workerModel.Name = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -56,8 +63,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.Lastname;
             set
             {
-                _workerModel.Lastname = value;
-                OnPropertyChanged();
+                if (value != _workerModel.Lastname)
+                {
+                    _workerModel.Lastname = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -68,8 +78,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.Gender;
             set
             {
-                _workerModel.Gender = value;
-                OnPropertyChanged();
+                if (value != _workerModel.Gender)
+                {
+                    _workerModel.Gender = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -78,10 +91,13 @@ namespace Hotellux.ViewModels
             get => _workerModel.DateOfBirth;
             set
             {
-                _workerModel.DateOfBirth = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(Age));
-                OnPropertyChanged(nameof(IsOfAge));
+                if (value != _workerModel.DateOfBirth)
+                {
+                    _workerModel.DateOfBirth = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Age));
+                    OnPropertyChanged(nameof(IsOfAge));
+                }
             }
         }
 
@@ -94,8 +110,11 @@ namespace Hotellux.ViewModels
             get => _workerModel.Email;
             set
             {
-                _workerModel.Email = value;
-                OnPropertyChanged();
+                if (value != _workerModel.Email)
+                {
+                    _workerModel.Email = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -104,16 +123,23 @@ namespace Hotellux.ViewModels
             get => _workerModel.PhonNumber;
             set
             {
-                _workerModel.PhonNumber = value;
-                OnPropertyChanged();
+                if (value != _workerModel.PhonNumber && value.Length <= 15)
+                {
+                    _workerModel.PhonNumber = value;
+                    OnPropertyChanged();
+                }
             }
         }
+
+        public DateTime CreatedDate => DateTime.FromBinary(BitConverter.ToInt64(_workerModel.Timestamp, 0));
 
         public ICommand SaveCommand { get; set; }
 
         public WorkerViewModel()
         {
-            _workerModel = new WorkerDataModel { DateOfBirth = DateTime.Today };
+            //_workerModel = new WorkerDataModel { DateOfBirth = DateTime.Today };
+            var test = _workerRepository.GetAll();
+            _workerModel = test.FirstOrDefault();
             SaveCommand = new RelayCommand(Save, CanSave);
         }
 
