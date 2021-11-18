@@ -36,7 +36,7 @@ namespace DataBase.DataModels
 
         public override string ToString()
         {
-            return $"ID {Id} | {Name} | {Lastname} | TYPE {Type}";
+            return $"{Id}|{Name} {Lastname}|{Type}";
         }
     }
 }

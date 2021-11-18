@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Tools\Extensions\" />
+    <Folder Include="Tools\Helpers\" />
     <Folder Include="Views\" />
   </ItemGroup>
 
