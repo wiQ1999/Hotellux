@@ -25,7 +25,7 @@ namespace Hotellux
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new WorkersViewModel();
+            DataContext = new MainWindowViewModel();
         }
     }
 }
