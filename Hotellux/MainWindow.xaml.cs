@@ -1,4 +1,5 @@
 ﻿using Hotellux.ViewModels;
+using Hotellux.ViewModels.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Hotellux
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new WorkerViewModel();
+            DataContext = new WorkersViewModel();
         }
     }
 }

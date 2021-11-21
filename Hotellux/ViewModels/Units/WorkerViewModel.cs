@@ -2,6 +2,7 @@
 using DataBase.Enums;
 using Hotellux.Commands;
 using Hotellux.Repositories;
+using Hotellux.Tools.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace Hotellux.ViewModels.Units
     {
         #region Properties
         private readonly WorkerDataModel _workerModel;
-
         private readonly WorkerRepository _workerRepository;
 
         public int Id => _workerModel.Id;
@@ -128,13 +128,14 @@ namespace Hotellux.ViewModels.Units
             }
         }
 
-        public DateTime CreatedDate => DateTime.FromBinary(BitConverter.ToInt64(_workerModel.Timestamp, 0));
+        public DateTime CreatedDate => _workerModel.Timestamp.CreateDate();
         #endregion
 
         public WorkerViewModel()
         {
             _workerRepository = new WorkerRepository();
             SaveCommand = new RelayCommand(Save, CanSave);
+            _workerModel = new WorkerDataModel();
         }
 
         public WorkerViewModel(WorkerDataModel model) : this()
@@ -149,6 +150,5 @@ namespace Hotellux.ViewModels.Units
 
         private bool CanSave(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && IsOfAge;
         #endregion
-
     }
 }

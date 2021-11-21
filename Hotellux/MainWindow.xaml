@@ -10,7 +10,7 @@
 
 
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="69,74,0,0" Text="{Binding CreatedDate, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <!--<TextBox HorizontalAlignment="Left" Margin="69,74,0,0" Text="{Binding CreatedDate, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
         <!--<TextBox HorizontalAlignment="Left" Margin="69,104,0,0" Text="{Binding WorkerType}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
         <!--<TextBox HorizontalAlignment="Left" Margin="69,127,0,0" Text="{Binding DateOfBirth, StringFormat='{}{0:MM/dd/yyyy}'}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
 
@@ -19,6 +19,16 @@
             SelectedItem="{Binding WorkerType}"/>-->
 
         <!--<Button Content="Button" HorizontalAlignment="Left" Margin="69,165,0,0" VerticalAlignment="Top" Command="{Binding SaveCommand}"/>-->
+        
+        <ListView ItemsSource="{Binding}" SelectedItem="{Binding SelectedItem}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding Lastname}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

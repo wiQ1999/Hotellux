@@ -34,5 +34,7 @@ namespace Hotellux.Repositories
             context.Logins.Update(toUpdate);
             context.SaveChanges();
         }
+
+        public LoginDataModel GetByLoginAndPassword(string login, string password) => GetAll().SingleOrDefault(x => x.Login == login && x.Password == password);
     }
 }
