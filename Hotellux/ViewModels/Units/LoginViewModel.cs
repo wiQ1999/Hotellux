@@ -1,6 +1,7 @@
 ﻿using DataBase.DataModels;
 using Hotellux.Commands;
 using Hotellux.Repositories;
+using Hotellux.Tools.Helpers;
 using System.Windows.Input;
 
 namespace Hotellux.ViewModels.Units
@@ -27,12 +28,10 @@ namespace Hotellux.ViewModels.Units
 
         private void LoginUser(object obj)
         {
-            //hasowanie hasła
-            string unhashedPassword = string.Empty;
+            string hashedPassword = PasswordHasherHelper.Hash(Password);
 
-            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, unhashedPassword);
+            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, hashedPassword);
 
-            //błąd i cleanmethod lub logowanie i przeniesienie do dalszej częsci
             if (model == null)
             {
 
