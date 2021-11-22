@@ -1,16 +1,18 @@
 ﻿using DataBase.DataModels;
 using Hotellux.Commands;
+using Hotellux.LoggedUser;
 using Hotellux.Repositories;
 using Hotellux.Tools.Helpers;
+using System;
 using System.Windows.Input;
 
-namespace Hotellux.ViewModels.Units
+namespace Hotellux.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         private LoginRepository _loginRepository;
 
-        #region PropertiesS
+        #region Properties
         public string Login { get; set; }
 
         public string Password { get; set; }
@@ -34,11 +36,16 @@ namespace Hotellux.ViewModels.Units
 
             if (model == null)
             {
-
+                //komunikat błędu - zobaczę jak to oprogramować
             }
             else
             {
+                WorkerDataModel workerModel =  new WorkerRepository().GetById(model.Id);
+                if (workerModel == null)
+                    throw new Exception("Nie znaleziono modelu pracownika, błąd relacji 1-1");
 
+                User.Initialize(workerModel);
+                //zalogowanie
             }
         }
 

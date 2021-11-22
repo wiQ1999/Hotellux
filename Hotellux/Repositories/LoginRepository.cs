@@ -22,11 +22,18 @@ namespace Hotellux.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<LoginDataModel> GetAll()
+        public List<LoginDataModel> GetAll()
         {
             using var context = new Context();
-            return context.Logins.AsEnumerable();
+            return context.Logins.ToList();
         }
+
+        public LoginDataModel GetById(int id)
+        {
+            using var context = new Context();
+            return context.Logins.SingleOrDefault(x => x.Id == id);
+        }
+
 
         public void Update(LoginDataModel toUpdate)
         {

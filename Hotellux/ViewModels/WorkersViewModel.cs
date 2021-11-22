@@ -1,13 +1,11 @@
 ﻿using DataBase.Enums;
 using Hotellux.Enums;
 using Hotellux.Repositories;
-using Hotellux.ViewModels.Units;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Hotellux.ViewModels.Collections
+namespace Hotellux.ViewModels
 {
     public class WorkersViewModel : BaseViewModel
     {

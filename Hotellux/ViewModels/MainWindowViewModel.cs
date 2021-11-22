@@ -1,5 +1,4 @@
 ﻿using Hotellux.Commands;
-using Hotellux.ViewModels.Collections;
 using System.Windows.Input;
 
 namespace Hotellux.ViewModels

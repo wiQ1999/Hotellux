@@ -1,17 +1,18 @@
 ﻿using DataBase.DataModels;
 using Hotellux.Repositories;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace Hotellux.ViewModels
 {
-    public class ReservationViewModel : INotifyPropertyChanged
+    public class ReservationViewModel : BaseViewModel
     {
         private ReservationDataModel _reservationModel;
-        private ReservationRepository _reservationRepository = new();
+        private ReservationRepository _reservationRepository;
 
-        public CustomerDataModel Customer
+        public ObservableCollection<CustomerViewModel> Customers { get; set; }
+
+        public CustomerDataModel SelectedCustomer
         {
             get => _reservationModel.Customer;
             set
@@ -21,7 +22,9 @@ namespace Hotellux.ViewModels
             }
         }
 
-        public RoomDataModel Room
+        public ObservableCollection<CustomerViewModel> Rooms { get; set; }
+
+        public RoomDataModel SelectedRoom
         {
             get => _reservationModel.Room;
             set
@@ -94,10 +97,8 @@ namespace Hotellux.ViewModels
         public ReservationViewModel()
         {
             _reservationModel = new ReservationDataModel();
+            _reservationRepository = new ReservationRepository();
+            new CustomerRepository().GetAll().ForEach(x => Customers.Add(new CustomerViewModel(x)));
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
