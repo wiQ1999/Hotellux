@@ -25,10 +25,16 @@ namespace Hotellux.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<CustomerDataModel> GetAll()
+        public List<CustomerDataModel> GetAll()
         {
             using var context = new Context();
-            return context.Customers.AsEnumerable();
+            return context.Customers.ToList();
+        }
+
+        public CustomerDataModel GetById(int id)
+        {
+            using var context = new Context();
+            return context.Customers.SingleOrDefault(x => x.Id == id);
         }
 
         public void Update(CustomerDataModel toUpdate)

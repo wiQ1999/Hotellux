@@ -5,10 +5,10 @@ using System.Runtime.CompilerServices;
 
 namespace Hotellux.ViewModels
 {
-    public class CustomerViewModel : INotifyPropertyChanged
+    public class CustomerViewModel : BaseViewModel
     {
         private CustomerDataModel _customerModel;
-        private CustomerRepository _customerRepository = new();
+        private CustomerRepository _customerRepository;
 
         public string Name
         {
@@ -53,11 +53,12 @@ namespace Hotellux.ViewModels
         public CustomerViewModel()
         {
             _customerModel = new CustomerDataModel();
+            _customerRepository = new CustomerRepository();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
+        public CustomerViewModel(CustomerDataModel customerModel) : this()
+        {
+            _customerModel = customerModel;
+        }
     }
 }

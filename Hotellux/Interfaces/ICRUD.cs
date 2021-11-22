@@ -6,7 +6,9 @@ namespace Hotellux.Interfaces
     {
         public void Create(T toCreate);
 
-        public IEnumerable<T> GetAll();
+        public List<T> GetAll();
+
+        public T GetById(int id);
 
         public void Update(T toUpdate);
 
