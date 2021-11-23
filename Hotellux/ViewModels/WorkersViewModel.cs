@@ -45,6 +45,7 @@ namespace Hotellux.ViewModels
         public WorkersViewModel()
         {
             _workerRepository = new WorkerRepository();
+            _allWorkers = new List<WorkerViewModel>();
             _workerRepository.GetAll().ForEach(x => _allWorkers.Add(new WorkerViewModel(x)));
             Workers = new ObservableCollection<WorkerViewModel>(_allWorkers);
             InitializeFilters();

@@ -11,7 +11,7 @@
 
     <Grid>
 
-        <ContentControl Content="{Binding ActiveViewModel}"/>
+        <!--<ContentControl Content="{Binding ActiveViewModel}"/>-->
 
     </Grid>
 </Window>

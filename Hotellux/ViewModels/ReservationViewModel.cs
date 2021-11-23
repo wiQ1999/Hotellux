@@ -1,12 +1,15 @@
 ﻿using DataBase.DataModels;
+using Hotellux.Commands;
 using Hotellux.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Hotellux.ViewModels
 {
     public class ReservationViewModel : BaseViewModel
     {
+        #region Properties
         private ReservationDataModel _reservationModel;
         private ReservationRepository _reservationRepository;
 
@@ -93,12 +96,42 @@ namespace Hotellux.ViewModels
                 OnPropertyChanged();
             }
         }
+        #endregion
 
         public ReservationViewModel()
         {
             _reservationModel = new ReservationDataModel();
             _reservationRepository = new ReservationRepository();
+            Customers = new ObservableCollection<CustomerViewModel>();
             new CustomerRepository().GetAll().ForEach(x => Customers.Add(new CustomerViewModel(x)));
+            Rooms = new ObservableCollection<CustomerViewModel>();
+            //new RoomRepository().GetAll().ForEach(x => Rooms.Add(new ))
+            InitializeCommands();
         }
+
+        public ReservationViewModel(ReservationDataModel reservationModel) : this()
+        {
+            _reservationModel = reservationModel;
+        }
+
+        #region Commands
+        public ICommand ComfirmCommand { get; set; }
+
+        private void ComfirmReservation(object obj) => _reservationRepository.Create(_reservationModel);
+
+        private bool CanComfirmReservation(object obj) => HasRequiredInformations();
+
+        public ICommand CancelCommand { get; set; }
+
+        private void CancelReservation(object obj) => _reservationRepository.Create(_reservationModel);
+        #endregion
+
+        private void InitializeCommands()
+        {
+            ComfirmCommand = new RelayCommand(ComfirmReservation, CanComfirmReservation);
+            CancelCommand = new RelayCommand(CancelReservation);
+        }
+
+        private bool HasRequiredInformations() => SelectedCustomer != null && SelectedRoom != null && PersonCount > 0;
     }
 }
