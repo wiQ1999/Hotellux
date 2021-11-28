@@ -42,6 +42,8 @@ namespace Hotellux.ViewModels
             }
         }
 
+        public override string ViewModelName => "Pracownicy";
+
         public WorkersViewModel()
         {
             _workerRepository = new WorkerRepository();

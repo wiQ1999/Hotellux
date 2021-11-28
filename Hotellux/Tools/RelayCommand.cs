@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Hotellux.Commands
+namespace Hotellux.Tools
 {
     public class RelayCommand : ICommand
     {

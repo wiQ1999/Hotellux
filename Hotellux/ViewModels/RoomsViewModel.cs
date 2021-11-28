@@ -1,16 +1,29 @@
 ﻿using DataBase.DataModels;
-using Hotellux.Commands;
-using Hotellux.Interfaces;
 using Hotellux.Repositories;
+using Hotellux.Tools;
+using Hotellux.Tools.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Hotellux.ViewModels
 {
-    public class RoomViewModel : BaseViewModel, IRequiredFields
+    public class RoomsViewModel : BaseViewModel
     {
-        #region Properties
-        private RoomDataModel _roomModel;
-        private RoomRepository _roomRepository;
+        private RoomDataModel _roomModel = new();
+        private RoomRepository _roomRepository = new();
+        private List<RoomDataModel> _allRooms = new();
+
+        #region List
+        public ObservableCollection<RoomDataModel> RoomsList { get; set; } = new();
+
+        #endregion
+
+        #region Fields
+        public override string ViewModelName => "Pokoje";
+
+        public int Id => _roomModel.Id;
 
         public int Floor
         {
@@ -77,10 +90,29 @@ namespace Hotellux.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public DateTime CreatedDate => _roomModel.Timestamp.CreateDate();
         #endregion
 
         #region Commands
+        public ICommand NewRoomCommand { get; set; }
+
         public ICommand SaveCommand { get; set; }
+        #endregion
+
+        public RoomsViewModel()
+        {
+            _allRooms = new List<RoomDataModel>(_roomRepository.GetAll());
+            RoomsList = new ObservableCollection<RoomDataModel>(_allRooms);
+            NewRoomCommand = new RelayCommand(NewRoom);
+            SaveCommand = new RelayCommand(Save, CanSave);
+        }
+
+        #region Methods
+        private void NewRoom(object obj)
+        {
+            _roomModel = new RoomDataModel();
+        }
 
         private void Save(object obj)
         {
@@ -88,34 +120,7 @@ namespace Hotellux.ViewModels
             _roomModel = new RoomDataModel();
         }
 
-        private bool CanSave(object obj) => HasRequiredFields();
-
-        public ICommand CancelCommand { get; set; }
-
-        private void Cancel(object obj)
-        {
-            //wyjście z formularza pokoju
-        }
+        private bool CanSave(object obj) => true;
         #endregion
-
-        public RoomViewModel()
-        {
-            _roomModel = new RoomDataModel();
-            _roomRepository = new RoomRepository();
-            InitializeCommands();
-        }
-
-        public RoomViewModel(RoomDataModel roomModel) : this()
-        {
-            _roomModel = roomModel;
-        }
-
-        private void InitializeCommands()
-        {
-            SaveCommand = new RelayCommand(Save, CanSave);
-            CancelCommand = new RelayCommand(Cancel);
-        }
-
-        public bool HasRequiredFields() => string.IsNullOrWhiteSpace(Number) && Size > 0 && Capacity > 0;
     }
 }
