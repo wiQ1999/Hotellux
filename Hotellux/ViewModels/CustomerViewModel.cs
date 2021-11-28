@@ -10,6 +10,8 @@ namespace Hotellux.ViewModels
         private CustomerDataModel _customerModel;
         private CustomerRepository _customerRepository;
 
+        public override string ViewModelName => "Klient";
+
         public string Name
         {
             get => _customerModel.Name;

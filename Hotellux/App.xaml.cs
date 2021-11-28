@@ -14,11 +14,5 @@ namespace Hotellux
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e) //TESTY
-        {
-            base.OnStartup(e);
-
-            //var test = new ReservationViewModel();
-        }
     }
 }

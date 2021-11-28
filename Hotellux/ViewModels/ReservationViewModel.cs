@@ -1,6 +1,6 @@
 ﻿using DataBase.DataModels;
-using Hotellux.Commands;
 using Hotellux.Repositories;
+using Hotellux.Tools;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -36,6 +36,8 @@ namespace Hotellux.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public override string ViewModelName => "Rezerwacje";
 
         public int PersonCount
         {

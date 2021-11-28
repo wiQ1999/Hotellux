@@ -1,7 +1,7 @@
 ﻿using DataBase.DataModels;
 using DataBase.Enums;
-using Hotellux.Commands;
 using Hotellux.Repositories;
+using Hotellux.Tools;
 using Hotellux.Tools.Extensions;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,8 @@ namespace Hotellux.ViewModels
         #region Properties
         private readonly WorkerDataModel _workerModel;
         private readonly WorkerRepository _workerRepository;
+
+        public override string ViewModelName => "Pracownik";
 
         public int Id => _workerModel.Id;
 

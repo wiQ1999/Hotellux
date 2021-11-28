@@ -1,7 +1,7 @@
 ﻿using DataBase.DataModels;
-using Hotellux.Commands;
 using Hotellux.LoggedUser;
 using Hotellux.Repositories;
+using Hotellux.Tools;
 using Hotellux.Tools.Helpers;
 using System;
 using System.Windows.Input;
@@ -13,6 +13,8 @@ namespace Hotellux.ViewModels
         private LoginRepository _loginRepository;
 
         #region Properties
+        public override string ViewModelName => "Logowanie";
+
         public string Login { get; set; }
 
         public string Password { get; set; }
