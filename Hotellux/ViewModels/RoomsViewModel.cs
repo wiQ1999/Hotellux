@@ -18,9 +18,20 @@ namespace Hotellux.ViewModels
         #region List
         public ObservableCollection<RoomDataModel> RoomsList { get; set; } = new();
 
+
         #endregion
 
         #region Fields
+        public RoomDataModel RoomModel
+        {
+            get => _roomModel;
+            set
+            {
+                _roomModel = value;
+                PropertyChangedAllFields();
+            }
+        }
+
         public override string ViewModelName => "Pokoje";
 
         public int Id => _roomModel.Id;
@@ -97,7 +108,7 @@ namespace Hotellux.ViewModels
         #region Commands
         public ICommand NewRoomCommand { get; set; }
 
-        public ICommand SaveCommand { get; set; }
+        public ICommand SaveRoomCommand { get; set; }
         #endregion
 
         public RoomsViewModel()
@@ -105,22 +116,35 @@ namespace Hotellux.ViewModels
             _allRooms = new List<RoomDataModel>(_roomRepository.GetAll());
             RoomsList = new ObservableCollection<RoomDataModel>(_allRooms);
             NewRoomCommand = new RelayCommand(NewRoom);
-            SaveCommand = new RelayCommand(Save, CanSave);
+            SaveRoomCommand = new RelayCommand(SaveRoom, CanSaveRoom);
         }
 
         #region Methods
         private void NewRoom(object obj)
         {
             _roomModel = new RoomDataModel();
+            PropertyChangedAllFields();
         }
 
-        private void Save(object obj)
+        private void SaveRoom(object obj)
         {
             _roomRepository.Create(_roomModel);
             _roomModel = new RoomDataModel();
         }
 
-        private bool CanSave(object obj) => true;
+        private bool CanSaveRoom(object obj) => true;
+
+        private void PropertyChangedAllFields()
+        {
+            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(Floor));
+            OnPropertyChanged(nameof(Number));
+            OnPropertyChanged(nameof(Size));
+            OnPropertyChanged(nameof(Capacity));
+            OnPropertyChanged(nameof(PricePerDay));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(CreatedDate));
+        }
         #endregion
     }
 }

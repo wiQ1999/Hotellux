@@ -5,9 +5,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hotellux.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="900"
              Background="LightGray">
     <Grid>
-        <TextBlock HorizontalAlignment="Right" Text="TEST"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="20">
+                <ListView ItemsSource="{Binding RoomsList}" SelectedItem="{Binding RoomModel}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Header="Piętro" Width="45" DisplayMemberBinding="{Binding Floor}" />
+                            <GridViewColumn Header="Numer pokoju" Width="90" DisplayMemberBinding="{Binding Number}" />
+                            <GridViewColumn Header="Wielkość m2" Width="80" DisplayMemberBinding="{Binding Size}" />
+                            <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
+                            <GridViewColumn Header="Cena za dobę" Width="100" DisplayMemberBinding="{Binding PricePerDay}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+
+            <Border Grid.Column="1" Margin="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Text="Piętro:"/>
+                        <TextBox Text="{Binding Floor}"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Nowy pokój" Command="{Binding NewRoomCommand}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Dodaj pokój" Command="{Binding SaveRoomCommand}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>
