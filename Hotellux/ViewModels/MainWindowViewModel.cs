@@ -11,7 +11,7 @@ namespace Hotellux.ViewModels
 
         public override string ViewModelName => "Główny widok";
 
-        public string ActiveViewModelName => _activeViewModel.ViewModelName;
+        public string ActiveViewModelName => "Zakładka: " + _activeViewModel.ViewModelName;
 
         public string UserName => "Zdzisiu Tester";//User.Get.FullName;
 
