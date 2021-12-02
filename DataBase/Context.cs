@@ -54,8 +54,8 @@ namespace DataBase
 
             #region Customers
             modelBuilder.Entity<CustomerDataModel>().HasData(
-                new CustomerDataModel { Id = 1, Name = "Robert", Lastname = "Kozłowski", PhonNumber = "124543996" },
-                new CustomerDataModel { Id = 2, Name = "Maciej", Lastname = "Jeziorek", Email = "maciej.jeziorek@gmail.com", PhonNumber = "124543996" },
+                new CustomerDataModel { Id = 1, Name = "Robert", Lastname = "Kozłowski", PhoneNumber = "124543996" },
+                new CustomerDataModel { Id = 2, Name = "Maciej", Lastname = "Jeziorek", Email = "maciej.jeziorek@gmail.com", PhoneNumber = "124543996" },
                 new CustomerDataModel { Id = 3, Name = "jan", Lastname = "Gitarek" },
                 new CustomerDataModel { Id = 4, Name = "Stean", Lastname = "Bobrowski", Email = "stefan.bobrowski@gmail.com" }
             );
@@ -73,7 +73,12 @@ namespace DataBase
 
             #region Cleanings
             modelBuilder.Entity<CleaningsDataModel>().HasData(
-                new CleaningsDataModel { Id = 1, State = TaskState.Complited, CreatorId = 2, ExecutorId = 3, RoomId = 5, CreatorDescription = "Opis osoby tworzącej zadanie.", ExecutorDescription = string.Empty, StartDatePlanned = new DateTime(), EndDatePlanned = new DateTime(), StartDateReal = new DateTime(), EndDateReal = new DateTime() },
+                new CleaningsDataModel { Id = 1, State = TaskState.Complited, CreatorId = 2, ExecutorId = 3, RoomId = 5, CreatorDescription = "Opis osoby tworzącej zadanie.", StartDatePlanned = new DateTime(2021, 10, 17, 10, 0, 0), EndDatePlanned = new DateTime(2021, 10, 17, 12, 0, 0), StartDateReal = new DateTime(2021, 10, 17, 9, 50, 17), EndDateReal = new DateTime(2021, 10, 17, 11, 50, 17) },
+                new CleaningsDataModel { Id = 2, State = TaskState.Complited, CreatorId = 2, ExecutorId = 4, RoomId = 1, CreatorDescription = "Opis osoby tworzącej zadanie.", StartDatePlanned = new DateTime(2021, 10, 16, 11, 0, 0), EndDatePlanned = new DateTime(2021, 10, 16, 13, 0, 0), StartDateReal = new DateTime(2021, 10, 16, 11, 12, 36), EndDateReal = new DateTime(2021, 10, 16, 13, 01, 36) },
+                new CleaningsDataModel { Id = 3, State = TaskState.Complited, CreatorId = 2, ExecutorId = 3, RoomId = 2, CreatorDescription = "Opis osoby tworzącej zadanie.", ExecutorDescription = "Pozostawiony bagaż w szafie", StartDatePlanned = new DateTime(2021, 10, 15, 13, 0, 0), EndDatePlanned = new DateTime(2021, 10, 15, 15, 0, 0), StartDateReal = new DateTime(2021, 10, 18, 13, 34, 1), EndDateReal = new DateTime(2021, 10, 18, 15, 21, 23) },
+                new CleaningsDataModel { Id = 4, State = TaskState.Complited, CreatorId = 2, ExecutorId = 4, RoomId = 1, CreatorDescription = "Opis osoby tworzącej zadanie.", StartDatePlanned = new DateTime(2021, 10, 18, 10, 0, 0), EndDatePlanned = new DateTime(2021, 10, 18, 12, 0, 0), StartDateReal = new DateTime(2021, 10, 18, 10, 8, 59), EndDateReal = new DateTime(2021, 10, 18, 12, 1, 43) },
+                new CleaningsDataModel { Id = 5, State = TaskState.New, CreatorId = 2, ExecutorId = 3, RoomId = 3, CreatorDescription = "Opis osoby tworzącej zadanie.", StartDatePlanned = new DateTime(2021, 10, 30, 9, 0, 0), EndDatePlanned = new DateTime(2021, 10, 30, 11, 0, 0) },
+                new CleaningsDataModel { Id = 6, State = TaskState.Realized, CreatorId = 3, CreatorDescription = "Pranie pościeli.", StartDatePlanned = new DateTime(2021, 10, 20, 8, 0, 0), EndDatePlanned = new DateTime(2021, 10, 20, 10, 0, 0) }
             );
             #endregion
 

@@ -107,8 +107,8 @@ namespace DataBase.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     State = table.Column<int>(type: "int", nullable: false),
                     CreatorId = table.Column<int>(type: "int", nullable: false),
-                    ExecutorId = table.Column<int>(type: "int", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    ExecutorId = table.Column<int>(type: "int", nullable: true),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
                     CreatorDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExecutorDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDatePlanned = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -125,7 +125,7 @@ namespace DataBase.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cleanings_Workers_CreatorId",
                         column: x => x.CreatorId,
@@ -137,7 +137,7 @@ namespace DataBase.Migrations
                         column: x => x.ExecutorId,
                         principalTable: "Workers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,6 +198,19 @@ namespace DataBase.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Cleanings",
+                columns: new[] { "Id", "CreatorDescription", "CreatorId", "EndDatePlanned", "EndDateReal", "ExecutorDescription", "ExecutorId", "RoomId", "StartDatePlanned", "StartDateReal", "State" },
+                values: new object[,]
+                {
+                    { 1, "Opis osoby tworzącej zadanie.", 2, new DateTime(2021, 10, 17, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 11, 50, 17, 0, DateTimeKind.Unspecified), null, 3, 5, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 9, 50, 17, 0, DateTimeKind.Unspecified), 0 },
+                    { 3, "Opis osoby tworzącej zadanie.", 2, new DateTime(2021, 10, 15, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 15, 21, 23, 0, DateTimeKind.Unspecified), "Pozostawiony bagaż w szafie", 3, 2, new DateTime(2021, 10, 15, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 13, 34, 1, 0, DateTimeKind.Unspecified), 0 },
+                    { 5, "Opis osoby tworzącej zadanie.", 2, new DateTime(2021, 10, 30, 11, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3, 3, new DateTime(2021, 10, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), null, 2 },
+                    { 6, "Pranie pościeli.", 3, new DateTime(2021, 10, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, new DateTime(2021, 10, 20, 8, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
+                    { 2, "Opis osoby tworzącej zadanie.", 2, new DateTime(2021, 10, 16, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 16, 13, 1, 36, 0, DateTimeKind.Unspecified), null, 4, 1, new DateTime(2021, 10, 16, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 16, 11, 12, 36, 0, DateTimeKind.Unspecified), 0 },
+                    { 4, "Opis osoby tworzącej zadanie.", 2, new DateTime(2021, 10, 18, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 12, 1, 43, 0, DateTimeKind.Unspecified), null, 4, 1, new DateTime(2021, 10, 18, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 10, 8, 59, 0, DateTimeKind.Unspecified), 0 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Logins",
                 columns: new[] { "Id", "Login", "Password", "WorkerId" },
                 values: new object[,]
@@ -213,11 +226,11 @@ namespace DataBase.Migrations
                 columns: new[] { "Id", "CustomerId", "EndDatePlanned", "EndDateReal", "PersonCount", "RoomId", "StartDatePlanned", "StartDateReal", "WithBreakfast" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), true },
-                    { 4, 1, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified), 2, 1, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), false },
-                    { 3, 3, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), true },
-                    { 5, 4, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified), 3, 3, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), false },
-                    { 1, 1, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 10, 44, 45, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), false }
+                    { 2, 2, new DateTime(2021, 10, 16, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 16, 11, 12, 36, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2021, 10, 15, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 15, 13, 10, 32, 0, DateTimeKind.Unspecified), true },
+                    { 4, 1, new DateTime(2021, 10, 18, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 10, 8, 59, 0, DateTimeKind.Unspecified), 2, 1, new DateTime(2021, 10, 17, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 11, 31, 19, 0, DateTimeKind.Unspecified), false },
+                    { 3, 3, new DateTime(2021, 10, 18, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 18, 13, 34, 1, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2021, 10, 15, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 15, 12, 11, 42, 0, DateTimeKind.Unspecified), true },
+                    { 5, 4, new DateTime(2021, 10, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 30, 9, 12, 31, 0, DateTimeKind.Unspecified), 2, 3, new DateTime(2021, 10, 20, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 20, 14, 55, 4, 0, DateTimeKind.Unspecified), false },
+                    { 1, 1, new DateTime(2021, 10, 17, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 17, 9, 50, 17, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2021, 10, 14, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 14, 12, 12, 45, 0, DateTimeKind.Unspecified), false }
                 });
 
             migrationBuilder.CreateIndex(

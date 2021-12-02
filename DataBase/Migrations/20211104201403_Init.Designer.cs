@@ -4,14 +4,16 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataBase.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20211104201403_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -480,6 +482,9 @@ namespace DataBase.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("Date");
 
@@ -512,6 +517,9 @@ namespace DataBase.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Workers");
@@ -520,6 +528,7 @@ namespace DataBase.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1976, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jan.brzęczyszczykiewicz@gmail.com",
                             Gender = 1,
@@ -527,11 +536,13 @@ namespace DataBase.Migrations
                             Lastname = "Brzęczyszczykiewicz",
                             Name = "Jan",
                             PhonNumber = "594291112",
-                            Type = 0
+                            Type = 0,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1988, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hanna.mrozek@gmail.com",
                             Gender = 0,
@@ -539,22 +550,26 @@ namespace DataBase.Migrations
                             Lastname = "Mrozek",
                             Name = "Hanna",
                             PhonNumber = "234965284",
-                            Type = 1
+                            Type = 1,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1992, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "pawel.nowak@gmail.com",
                             IsActive = true,
                             Lastname = "Nowak",
                             Name = "Paweł",
                             PhonNumber = "110443785",
-                            Type = 2
+                            Type = 2,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1980, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "aneta.buda@gmail.com",
                             Gender = 0,
@@ -562,7 +577,8 @@ namespace DataBase.Migrations
                             Lastname = "Buda",
                             Name = "Aneta",
                             PhonNumber = "924577646",
-                            Type = 2
+                            Type = 2,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

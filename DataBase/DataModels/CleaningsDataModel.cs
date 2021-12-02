@@ -28,9 +28,9 @@ namespace DataBase.DataModels
 
         public RoomDataModel Room { get; set; }
 
-        public string? CreatorDescription { get; set; }
+        public string CreatorDescription { get; set; }
 
-        public string? ExecutorDescription { get; set; }
+        public string ExecutorDescription { get; set; }
 
         public DateTime StartDatePlanned { get; set; }
 
