@@ -37,7 +37,7 @@ namespace Hotellux.Repositories
         public void Update(RoomDataModel toUpdate)
         {
             using var context = new Context();
-            context.Rooms.Add(toUpdate);
+            context.Rooms.Update(toUpdate);
             context.SaveChanges();
         }
     }

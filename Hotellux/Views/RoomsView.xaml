@@ -20,18 +20,42 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Margin="20">
-                <ListView ItemsSource="{Binding RoomsList}" SelectedItem="{Binding RoomModel}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                            <GridViewColumn Header="Piętro" Width="45" DisplayMemberBinding="{Binding Floor}" />
-                            <GridViewColumn Header="Numer pokoju" Width="90" DisplayMemberBinding="{Binding Number}" />
-                            <GridViewColumn Header="Wielkość m2" Width="80" DisplayMemberBinding="{Binding Size}" />
-                            <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
-                            <GridViewColumn Header="Cena za dobę" Width="100" DisplayMemberBinding="{Binding PricePerDay}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Piętro:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <ComboBox Width="100" Height="20" ItemsSource="{Binding AllFloors}" SelectedItem="{Binding SelectedFloor}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearFloorFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Pojemność:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <ComboBox Width="100" Height="20" ItemsSource="{Binding AllCapacities}" SelectedItem="{Binding SelectedCapacity}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearCapacityFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <ListView Grid.Row="1" ItemsSource="{Binding RoomsList}" SelectedItem="{Binding RoomModel}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Header="Piętro" Width="45" DisplayMemberBinding="{Binding Floor}" />
+                                <GridViewColumn Header="Numer pokoju" Width="90" DisplayMemberBinding="{Binding Number}" />
+                                <GridViewColumn Header="Wielkość m2" Width="80" DisplayMemberBinding="{Binding Size}" />
+                                <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
+                                <GridViewColumn Header="Cena za dobę" Width="100" DisplayMemberBinding="{Binding PricePerDay}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </Border>
 
             <Border Grid.Column="1" Margin="20">
@@ -112,7 +136,7 @@
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Dodaj pokój" Command="{Binding SaveRoomCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Zapisz pokój" Command="{Binding SaveRoomCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>
