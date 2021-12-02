@@ -94,6 +94,9 @@ namespace Hotellux.ViewModels
             {
                 if (value == _roomModel.Size) return;
                 _roomModel.Size = value;
+                ClearErrors();
+                if (_roomModel.Size < 0)
+                    AddError(nameof(Size), "Wielkość pokoju musi być większa od zera.");
                 OnPropertyChanged();
             }
         }
@@ -181,7 +184,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private bool CanSaveRoom(object obj) => true;
+        private bool CanSaveRoom(object obj) => !HasErrors;
 
         private void PropertyChangedAllFields()
         {

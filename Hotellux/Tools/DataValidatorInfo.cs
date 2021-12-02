@@ -14,7 +14,7 @@ namespace Hotellux.Tools
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        public IEnumerable GetErrors(string propertyName) => _propertyErrors.GetValueOrDefault(propertyName);
+        public IEnumerable GetErrors(string propertyName) => _propertyErrors.GetValueOrDefault(propertyName, null);
 
         public void AddError(string propertyName, string errorMessage)
         {
