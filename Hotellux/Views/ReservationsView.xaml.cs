@@ -3,11 +3,11 @@
 namespace Hotellux.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy RoomsView.xaml
+    /// Logika interakcji dla klasy ReservationsView.xaml
     /// </summary>
-    public partial class RoomsView : UserControl
+    public partial class ReservationsView : UserControl
     {
-        public RoomsView()
+        public ReservationsView()
         {
             InitializeComponent();
         }

@@ -13,7 +13,7 @@ namespace Hotellux.ViewModels
         private ReservationDataModel _reservationModel;
         private ReservationRepository _reservationRepository;
 
-        public ObservableCollection<CustomerViewModel> Customers { get; set; }
+        public ObservableCollection<CustomersViewModel> Customers { get; set; }
 
         public CustomerDataModel SelectedCustomer
         {
@@ -25,7 +25,7 @@ namespace Hotellux.ViewModels
             }
         }
 
-        public ObservableCollection<CustomerViewModel> Rooms { get; set; }
+        public ObservableCollection<CustomersViewModel> Rooms { get; set; }
 
         public RoomDataModel SelectedRoom
         {
@@ -104,9 +104,9 @@ namespace Hotellux.ViewModels
         {
             _reservationModel = new ReservationDataModel();
             _reservationRepository = new ReservationRepository();
-            Customers = new ObservableCollection<CustomerViewModel>();
-            new CustomerRepository().GetAll().ForEach(x => Customers.Add(new CustomerViewModel(x)));
-            Rooms = new ObservableCollection<CustomerViewModel>();
+            Customers = new ObservableCollection<CustomersViewModel>();
+            //new CustomerRepository().GetAll().ForEach(x => Customers.Add(new CustomersViewModel(x)));
+            Rooms = new ObservableCollection<CustomersViewModel>();
             //new RoomRepository().GetAll().ForEach(x => Rooms.Add(new ))
             InitializeCommands();
         }

@@ -13,12 +13,12 @@ namespace Hotellux.ViewModels
 
         public string ActiveViewModelName => "Zakładka: " + _activeViewModel.ViewModelName;
 
-        public string UserName => "Zdzisiu Tester";//User.Get.FullName;
+        public string UserName => "Użytkownik: " + "Zdzisiu Tester";//User.Get.FullName;
 
         public BaseViewModel ActiveViewModel
         {
             get => _activeViewModel;
-            set
+            private set
             {
                 if (value == _activeViewModel) return;
                 _activeViewModel = value;
@@ -43,6 +43,10 @@ namespace Hotellux.ViewModels
                 case "POKOJE":
                     ActiveViewModel = new RoomsViewModel();
                     break;
+                case "KLIENCI":
+                    ActiveViewModel = new CustomersViewModel();
+                    break;
+
                 default:
                     throw new ArgumentException("Przesłano niepoprawny parametr w widoku");
             }

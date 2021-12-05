@@ -12,24 +12,27 @@ namespace Hotellux.ViewModels
 {
     public class RoomsViewModel : BaseViewModel
     {
+        #region Properties
         private RoomDataModel _roomModel = new();
         private RoomRepository _roomRepository = new();
+        private int _selectedRoomIndex;
         private int? _selectedFloor;
         private int? _selectedCapacity;
 
-        public RoomDataModel RoomModel
+        #region List
+        public ObservableCollection<RoomDataModel> RoomsList { get; set; } = new();
+
+        public int SelectedRoomIndex
         {
-            get => _roomModel;
+            get => _selectedRoomIndex;
             set
             {
-                if (value == null) return;
-                _roomModel = value;
+                _selectedRoomIndex = value;
+                if (value < 0) return;
+                _roomModel = RoomsList[value];
                 PropertyChangedAllFields();
             }
         }
-
-        #region List
-        public ObservableCollection<RoomDataModel> RoomsList { get; set; } = new();
 
         public int[] AllFloors => GetAllFloorsFilter();
 
@@ -83,6 +86,9 @@ namespace Hotellux.ViewModels
             {
                 if (value == _roomModel.Number) return;
                 _roomModel.Number = value;
+                ClearErrors();
+                if (string.IsNullOrWhiteSpace(value))
+                    AddError(nameof(Number), "Wartość nie może być pusta.");
                 OnPropertyChanged();
             }
         }
@@ -95,7 +101,7 @@ namespace Hotellux.ViewModels
                 if (value == _roomModel.Size) return;
                 _roomModel.Size = value;
                 ClearErrors();
-                if (_roomModel.Size < 0)
+                if (value < 0)
                     AddError(nameof(Size), "Wielkość pokoju musi być większa od zera.");
                 OnPropertyChanged();
             }
@@ -108,6 +114,9 @@ namespace Hotellux.ViewModels
             {
                 if (value == _roomModel.Capacity) return;
                 _roomModel.Capacity = value;
+                ClearErrors();
+                if (value < 0)
+                    AddError(nameof(Capacity), "Pojemność pokoju musi być większa od zera.");
                 OnPropertyChanged();
             }
         }
@@ -119,6 +128,9 @@ namespace Hotellux.ViewModels
             {
                 if (value == _roomModel.PricePerDay) return;
                 _roomModel.PricePerDay = value;
+                ClearErrors();
+                if (value < 0)
+                    AddError(nameof(PricePerDay), "Cena za dobę musi być większa od zera.");
                 OnPropertyChanged();
             }
         }
@@ -146,58 +158,19 @@ namespace Hotellux.ViewModels
 
         public ICommand SaveRoomCommand { get; set; }
         #endregion
+        #endregion
 
         public RoomsViewModel()
         {
-            CreateListView();
             ClearFloorFilterCommand = new RelayCommand(ClearFloorFilter);
             ClearCapacityFilterCommand = new RelayCommand(ClearCapacityFilter);
             NewRoomCommand = new RelayCommand(NewRoom);
             SaveRoomCommand = new RelayCommand(SaveRoom, CanSaveRoom);
-        }
-
-        #region Methods
-        private void ClearFloorFilter(object obj)
-        {
-            SelectedFloor = null;
-            OnPropertyChanged(nameof(SelectedFloor));
-        }
-
-        private void ClearCapacityFilter(object obj)
-        {
-            SelectedCapacity = null;
-            OnPropertyChanged(nameof(SelectedCapacity));
-        }
-
-        private void NewRoom(object obj)
-        {
-            _roomModel = new RoomDataModel();
-            PropertyChangedAllFields();
-        }
-
-        private void SaveRoom(object obj)
-        {
-            if (_roomRepository.GetById(Id) == null)
-                _roomRepository.Create(_roomModel);
-            else
-                _roomRepository.Update(_roomModel);
             CreateListView();
         }
 
-        private bool CanSaveRoom(object obj) => !HasErrors;
-
-        private void PropertyChangedAllFields()
-        {
-            OnPropertyChanged(nameof(Id));
-            OnPropertyChanged(nameof(Floor));
-            OnPropertyChanged(nameof(Number));
-            OnPropertyChanged(nameof(Size));
-            OnPropertyChanged(nameof(Capacity));
-            OnPropertyChanged(nameof(PricePerDay));
-            OnPropertyChanged(nameof(Description));
-            OnPropertyChanged(nameof(CreatedDate));
-        }
-
+        #region Methods
+        #region List
         private int[] GetAllFloorsFilter() => _roomRepository.GetAll().Select(x => x.Floor).Distinct().ToArray();
 
         private int[] GetAllCapacitiesFilter() => _roomRepository.GetAll().Select(x => x.Capacity).Distinct().ToArray();
@@ -213,6 +186,43 @@ namespace Hotellux.ViewModels
 
             RoomsList = new ObservableCollection<RoomDataModel>(filteredList);
             OnPropertyChanged(nameof(RoomsList));
+        }
+        #endregion
+
+        #region Commands
+        private void ClearFloorFilter(object obj) => SelectedFloor = null;
+
+        private void ClearCapacityFilter(object obj) => SelectedCapacity = null;
+
+        private void NewRoom(object obj)
+        {
+            _roomModel = new RoomDataModel();
+            ClearAllErrors();
+            PropertyChangedAllFields();
+        }
+
+        private void SaveRoom(object obj)
+        {
+            if (_roomRepository.GetById(Id) == null)
+                _roomRepository.Create(_roomModel);
+            else
+                _roomRepository.Update(_roomModel);
+            CreateListView();
+        }
+
+        private bool CanSaveRoom(object obj) => !string.IsNullOrWhiteSpace(Number) && !HasErrors;
+        #endregion
+
+        private void PropertyChangedAllFields()
+        {
+            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(Floor));
+            OnPropertyChanged(nameof(Number));
+            OnPropertyChanged(nameof(Size));
+            OnPropertyChanged(nameof(Capacity));
+            OnPropertyChanged(nameof(PricePerDay));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(CreatedDate));
         }
         #endregion
     }
