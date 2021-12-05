@@ -37,12 +37,17 @@ namespace Hotellux.ViewModels
                 OnErrorChanged(propertyName);
         }
 
+        public  void ClearAllErrors()
+        {
+            _propertyErrors.Clear();
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnErrorChanged([CallerMemberName] string propertyName = null)
+        protected void OnErrorChanged([CallerMemberName] string propertyName = null)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
