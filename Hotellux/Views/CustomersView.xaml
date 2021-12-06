@@ -29,14 +29,14 @@
                     <StackPanel>
                         <TextBlock Margin="10, 0, 5, 0" Text="Imię:"/>
                         <StackPanel Margin="5" Orientation="Horizontal">
-                            <TextBox Width="100" Text="{Binding SelectedName}"/>
+                            <TextBox Width="100" Text="{Binding SelectedName, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Width="20" Content="X" Command="{Binding ClearNameFilterCommand}"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Margin="10, 0, 5, 0" Text="Nazwisko:"/>
                         <StackPanel Margin="5" Orientation="Horizontal">
-                            <TextBox Width="100" Text="{Binding SelectedLastName}"/>
+                            <TextBox Width="100" Text="{Binding SelectedLastName, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Width="20" Content="X" Command="{Binding ClearLastNameFilterCommand}"/>
                         </StackPanel>
                         </StackPanel>
