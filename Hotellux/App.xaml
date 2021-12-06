@@ -38,6 +38,12 @@
         <DataTemplate DataType="{x:Type viewmodels:CustomersViewModel}">
             <views:CustomersView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ReservationsViewModel}">
+            <views:ReservationsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:WorkersViewModel}">
+            <views:WorkersView/>
+        </DataTemplate>
     </Application.Resources>
     
 </Application>

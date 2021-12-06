@@ -5,13 +5,167 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:Hotellux.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="900">
     
     <UserControl.DataContext>
         <viewModels:CustomersViewModel />
     </UserControl.DataContext>
+
+    <Border CornerRadius="30, 30, 30, 30" Background="LightGray">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="20 20 10 20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Klient:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <TextBox Width="100" Text="{Binding SelectedCustomerFullName, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearCustomerFullNameFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Ilość osób:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <ComboBox Width="50" ItemsSource="{Binding AllPersonCount}" SelectedItem="{Binding SelectedPersonCount}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearPersonCountFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Data rozp.:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <TextBox Width="60" Text="{Binding SelectedStartDatePlanned}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearStartDatePlannedFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Data zak.:"/>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <TextBox Width="60" Text="{Binding SelectedEndDatePlanned}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearEndDatePlannedFilterCommand}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <ListView Grid.Row="1" ItemsSource="{Binding ReservationsList}" SelectedIndex="{Binding SelectedReservationIndex}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Header="Klient" Width="120" DisplayMemberBinding="{Binding Customer}" />
+                                <GridViewColumn Header="Pokój" Width="120" DisplayMemberBinding="{Binding Room}" />
+                                <GridViewColumn Header="Plan. rozp." Width="70" DisplayMemberBinding="{Binding StartDatePlanned}" />
+                                <GridViewColumn Header="Plan. zak." Width="70" DisplayMemberBinding="{Binding EndDatePlanned}" />
+                                <GridViewColumn Header="Rozpoczęcie" Width="70" DisplayMemberBinding="{Binding StartDateReal}" />
+                                <GridViewColumn Header="Zakończenie" Width="70" DisplayMemberBinding="{Binding EndDateReal}" />
+                                <GridViewColumn Header="Data powstania" Width="110" DisplayMemberBinding="{Binding CreatedDate}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Margin="10 20 20 20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="250"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ListView Grid.Column="0" Margin="0, 0, 10, 5" ItemsSource="{Binding CustomersList}" SelectedIndex="{Binding SelectedCustomerIndex}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Imię" Width="90" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Lastname}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <ListView Grid.Column="1" Margin="10, 0, 0, 5" ItemsSource="{Binding RoomsList}" SelectedIndex="{Binding SelectedRoomIndex}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Numer" Width="45" DisplayMemberBinding="{Binding Number}" />
+                                    <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
+                                    <GridViewColumn Header="Cena" Width="70" DisplayMemberBinding="{Binding PricePerDay}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Ilość osób:"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PersonCount}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Pojemność:"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Capacity}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Cena za dobę:"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PricePerDay}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Opis:"/>
+                            <TextBox Margin="0, 2, 0, 0" Height="60" Text="{Binding Description}"/>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Nowy pokój" Command="{Binding NewRoomCommand}"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Zapisz pokój" Command="{Binding SaveRoomCommand}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
     
-    <Grid>
-            
-    </Grid>
 </UserControl>

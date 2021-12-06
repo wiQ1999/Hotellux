@@ -46,7 +46,9 @@ namespace Hotellux.ViewModels
                 case "KLIENCI":
                     ActiveViewModel = new CustomersViewModel();
                     break;
-
+                case "REZERWACJE":
+                    ActiveViewModel = new ReservationsViewModel();
+                    break;
                 default:
                     throw new ArgumentException("Przesłano niepoprawny parametr w widoku");
             }
