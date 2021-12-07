@@ -183,7 +183,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private bool CanSaveRoom(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(PhoneNumber) && !HasErrors;
+        private bool CanSaveRoom(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Hotellux" 
         Height="600" Width="1200" 
-        MinHeight="400" MinWidth="800"
+        MinHeight="600" MinWidth="1200"
         Background="#e0e0e0">
 
     <Window.DataContext>

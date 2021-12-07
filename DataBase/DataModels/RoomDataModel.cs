@@ -24,5 +24,10 @@ namespace DataBase.DataModels
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
+
+        public override string ToString()
+        {
+            return $"Pokój {Floor}/{Number}";
+        }
     }
 }
