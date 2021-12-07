@@ -17,13 +17,13 @@ namespace Hotellux.ViewModels
         private ReservationRepository _reservationRepository = new();
         private CustomerRepository _customerRepository = new();
         private RoomRepository _roomRepository = new();
-        private int _selectedReservationIndex;
+        private int _selectedReservationIndex ;
+        private int _selectedCustomerIndex;
+        private int _selectedRoomIndex;
         private string _selectedCustomerFullName;
         private int? _selectedPersonCount;
         private DateTime? _selectedStartDatePlanned;
         private DateTime? _selectedEndDatePlanned;
-        private int _selectedCustomerIndex;
-        private int _selectedRoomIndex;
 
         #region List
         public ObservableCollection<ReservationDataModel> ReservationsList { get; set; }
@@ -36,6 +36,8 @@ namespace Hotellux.ViewModels
                 _selectedReservationIndex = value;
                 if (value < 0) return;
                 _reservationModel = ReservationsList[value];
+                SelectedCustomerIndex = CustomerId;
+                SelectedRoomIndex = RoomId;
                 PropertyChangedAllFields();
             }
         }
@@ -98,7 +100,9 @@ namespace Hotellux.ViewModels
             {
                 _selectedCustomerIndex = value;
                 if (value < 0) return;
-                Customer = CustomersList[value];
+                CustomerId = value;
+                OnPropertyChanged(nameof(CustomerId));
+                OnPropertyChanged(nameof(Customer));
             }
         }
 
@@ -111,7 +115,9 @@ namespace Hotellux.ViewModels
             {
                 _selectedRoomIndex = value;
                 if (value < 0) return;
-                Room = RoomsList[value];
+                RoomId = value;
+                OnPropertyChanged(nameof(RoomId));
+                OnPropertyChanged(nameof(Room));
             }
         }
         #endregion
@@ -121,24 +127,52 @@ namespace Hotellux.ViewModels
 
         public int Id => _reservationModel.Id;
 
+        public int CustomerId
+        {
+            get => _reservationModel.CustomerId;
+            set
+            {
+                if (value == _reservationModel.CustomerId) return;
+                _reservationModel.CustomerId = value;
+                _selectedCustomerIndex = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CustomersList));
+            }
+        }
+
         public CustomerDataModel Customer
         {
-            get => _reservationModel.Customer;
+            get => _customerRepository.GetById(CustomerId);
             private set
             {
                 if (value == _reservationModel.Customer) return;
                 _reservationModel.Customer = value;
+                _reservationModel.CustomerId = value.Id;
                 OnPropertyChanged();
+            }
+        }
+
+        public int RoomId
+        {
+            get => _reservationModel.RoomId;
+            set
+            {
+                if (value == _reservationModel.RoomId) return;
+                _reservationModel.RoomId = value;
+                _selectedRoomIndex = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(RoomsList));
             }
         }
 
         public RoomDataModel Room
         {
-            get => _reservationModel.Room;
+            get => _roomRepository.GetById(_reservationModel.RoomId);
             private set
             {
                 if (value == _reservationModel.Room) return;
                 _reservationModel.Room = value;
+                _reservationModel.RoomId = value.Id;
                 OnPropertyChanged();
             }
         }
@@ -151,7 +185,7 @@ namespace Hotellux.ViewModels
                 if (value == _reservationModel.PersonCount) return;
                 _reservationModel.PersonCount = value;
                 ClearErrors();
-                if (value < 0)
+                if (value <= 0)
                     AddError(nameof(PersonCount), "Ilość osób musi być większa od zera.");
                 if (Room != null && value > Room.Capacity)
                     AddError(nameof(PersonCount), "Ilość osób przekracza dostępną ilość miejsc.");
@@ -258,6 +292,7 @@ namespace Hotellux.ViewModels
             CreateReservationsListView();
             CustomersList = new ObservableCollection<CustomerDataModel>(_customerRepository.GetAll());
             RoomsList = new ObservableCollection<RoomDataModel>(_roomRepository.GetAll());
+            InitializeNewReservation();
         }
 
         #region Methods
@@ -268,17 +303,13 @@ namespace Hotellux.ViewModels
         {
             List<ReservationDataModel> filteredList = _reservationRepository.GetAll();
 
-            if (!string.IsNullOrWhiteSpace(_selectedCustomerFullName))
-                filteredList = filteredList.Where(x => x.Customer != null && (x.Customer.Name + " " + x.Customer.Lastname).Contains(_selectedCustomerFullName)).ToList();
-            if (_selectedPersonCount != null)
-                filteredList = filteredList.Where(x => x.Room != null && x.Room.Capacity == _selectedPersonCount).ToList();
             if (_selectedStartDatePlanned != null)
                 filteredList = filteredList.Where(x => x.StartDatePlanned <= _selectedStartDatePlanned).ToList();
             if (_selectedEndDatePlanned != null)
                 filteredList = filteredList.Where(x => x.EndDateReal >= _selectedEndDatePlanned).ToList();
 
             ReservationsList = new ObservableCollection<ReservationDataModel>(filteredList);
-            OnPropertyChanged(nameof(RoomsList));
+            OnPropertyChanged(nameof(ReservationsList));
         }
         #endregion
 
@@ -293,9 +324,10 @@ namespace Hotellux.ViewModels
 
         private void NewReservation(object obj)
         {
-            _reservationModel = new ReservationDataModel();
+            InitializeNewReservation();
             ClearAllErrors();
             PropertyChangedAllFields();
+            CreateReservationsListView();
         }
 
         private void SaveRoom(object obj)//validate!!! TODO
@@ -307,13 +339,19 @@ namespace Hotellux.ViewModels
             CreateReservationsListView();
         }
 
-        private bool CanSaveRoom(object obj) => !HasErrors;
+        private bool CanSaveRoom(object obj) => PersonCount > 0 && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()
         {
+            OnPropertyChanged(nameof(CustomersList));
+            OnPropertyChanged(nameof(SelectedCustomerIndex));
+            OnPropertyChanged(nameof(RoomsList));
+            OnPropertyChanged(nameof(SelectedRoomIndex));
             OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(CustomerId));
             OnPropertyChanged(nameof(Customer));
+            OnPropertyChanged(nameof(RoomId));
             OnPropertyChanged(nameof(Room));
             OnPropertyChanged(nameof(PersonCount));
             OnPropertyChanged(nameof(WithBreakfast));
@@ -322,6 +360,14 @@ namespace Hotellux.ViewModels
             OnPropertyChanged(nameof(StartDateReal));
             OnPropertyChanged(nameof(EndDateReal));
             OnPropertyChanged(nameof(CreatedDate));
+        }
+
+        private void InitializeNewReservation()
+        {
+            _reservationModel = new ReservationDataModel();
+            _selectedReservationIndex = -1;
+            _selectedCustomerIndex = -1;
+            _selectedRoomIndex = -1;
         }
         #endregion
     }

@@ -50,7 +50,6 @@
                                 <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Lastname}" />
                                 <GridViewColumn Header="Emial" Width="100" DisplayMemberBinding="{Binding Email}" />
                                 <GridViewColumn Header="Numer telefonu" Width="100" DisplayMemberBinding="{Binding PhoneNumber}" />
-                                <GridViewColumn Header="Data powstania" Width="110" DisplayMemberBinding="{Binding CreatedDate}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

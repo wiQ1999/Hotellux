@@ -52,7 +52,6 @@
                                 <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
                                 <GridViewColumn Header="Cena za dobę" Width="100" DisplayMemberBinding="{Binding PricePerDay}" />
                                 <GridViewColumn Header="Opis" Width="250" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Data powstania" Width="110" DisplayMemberBinding="{Binding CreatedDate}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
