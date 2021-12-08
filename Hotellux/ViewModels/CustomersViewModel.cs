@@ -153,9 +153,9 @@ namespace Hotellux.ViewModels
             List<CustomerDataModel> filteredList = _customerRepository.GetAll();
 
             if (!string.IsNullOrEmpty(_selectedName))
-                filteredList = filteredList.Where(x => x.Name.Contains(_selectedName)).ToList();
+                filteredList = filteredList.Where(x => x.Name.ToUpper().Contains(_selectedName.ToUpper())).ToList();
             if (!string.IsNullOrEmpty(_selectedLastName))
-                filteredList = filteredList.Where(x => x.Lastname.Contains(_selectedLastName)).ToList();
+                filteredList = filteredList.Where(x => x.Lastname.ToUpper().Contains(_selectedLastName.ToUpper())).ToList();
 
             CustomersList = new ObservableCollection<CustomerDataModel>(filteredList);
             OnPropertyChanged(nameof(CustomersList));

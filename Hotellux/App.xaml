@@ -32,6 +32,9 @@
         </Style>
 
         <!-- WYŚWIETLANIE WSKAZANYCH WIDOKÓW -->
+        <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:RoomsViewModel}">
             <views:RoomsView/>
         </DataTemplate>

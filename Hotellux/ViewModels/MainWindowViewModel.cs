@@ -1,4 +1,5 @@
-﻿using Hotellux.Tools;
+﻿using Hotellux.LoggedUser;
+using Hotellux.Tools;
 using System;
 using System.Windows.Input;
 
@@ -9,11 +10,11 @@ namespace Hotellux.ViewModels
         #region Properties
         private BaseViewModel _activeViewModel;
 
-        public override string ViewModelName => "Główny widok";
+        public override string ViewModelName => "Startowa";
 
-        public string ActiveViewModelName => "Zakładka: " + _activeViewModel.ViewModelName;
+        public string ActiveViewModelName => "Zakładka: " + (_activeViewModel != null ? _activeViewModel.ViewModelName : this.ViewModelName);
 
-        public string UserName => "Użytkownik: " + "Zdzisiu Tester";//User.Get.FullName;
+        public string UserName => User.IsInitialized() ? "Użytkownik: " + User.Get.FullName : string.Empty;
 
         public BaseViewModel ActiveViewModel
         {
@@ -29,7 +30,7 @@ namespace Hotellux.ViewModels
 
         public MainWindowViewModel()
         {
-            _activeViewModel = new WorkersViewModel();//zmiana na jakiś bazowy widok startowy
+            _activeViewModel = new LoginViewModel();
             OpenFolderCommand = new RelayCommand(OpenFolder, CanOpenFolder);
         }
 
@@ -49,13 +50,16 @@ namespace Hotellux.ViewModels
                 case "REZERWACJE":
                     ActiveViewModel = new ReservationsViewModel();
                     break;
+                case "PRACOWNICY":
+                    ActiveViewModel = new WorkersViewModel();
+                    break;
                 default:
                     throw new ArgumentException("Przesłano niepoprawny parametr w widoku");
             }
             OnPropertyChanged(nameof(ActiveViewModelName));
         }
 
-        private bool CanOpenFolder(object obj) => true;//!(_activeViewModel is WorkersViewModel);
+        private bool CanOpenFolder(object obj) => User.IsInitialized();
         #endregion
     }
 }
