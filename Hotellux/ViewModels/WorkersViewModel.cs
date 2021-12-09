@@ -16,11 +16,14 @@ namespace Hotellux.ViewModels
     {
         #region Properties
         private WorkerDataModel _workerModel = new();
+        private LoginDataModel _loginModel = new();
         private WorkerRepository _workerRepository = new();
-        private int _selectedWorkerIndex;
+        private LoginRepository _loginRepository = new();
+        private int _selectedWorkerIndex = -1;
         private string _selectedName;
         private string _selectedLastname;
         private WorkerType? _selectedType;
+        private string _password = "?";
 
         #region List
         public ObservableCollection<WorkerDataModel> WorkersList { get; set; } = new();
@@ -33,6 +36,8 @@ namespace Hotellux.ViewModels
                 _selectedWorkerIndex = value;
                 if (value < 0) return;
                 _workerModel = WorkersList[value];
+                _loginModel = _loginRepository.GetById(value + 1);
+                _password = "?";
                 PropertyChangedAllFields();
             }
         }
@@ -187,6 +192,35 @@ namespace Hotellux.ViewModels
             }
         }
 
+        public string Login
+        {
+            get => _loginModel.Login;
+            set
+            {
+                if (value == _loginModel.Login) return;
+                _loginModel.Login = value;
+                ClearErrors();
+                if (string.IsNullOrWhiteSpace(value))
+                    AddError(nameof(Login), "Wartość nie może być pusta.");
+                OnPropertyChanged();
+            }
+        }
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                if (value == _password) return;
+                _password = value;
+                _loginModel.Password = PasswordHasherHelper.Hash(_password);
+                ClearErrors();
+                if (string.IsNullOrWhiteSpace(value))
+                    AddError(nameof(Password), "Wartość nie może być pusta.");
+                OnPropertyChanged();
+            }
+        }
+
         public DateTime CreatedDate => _workerModel.Timestamp.CreateDate();
         #endregion
 
@@ -252,6 +286,8 @@ namespace Hotellux.ViewModels
         {
             _workerModel = new WorkerDataModel();
             _workerModel.DateOfBirth = DateTime.Today.AddYears(-18);
+            _loginModel = new LoginDataModel();
+            _password = "?";
             ClearAllErrors();
             PropertyChangedAllFields();
         }
@@ -259,13 +295,19 @@ namespace Hotellux.ViewModels
         private void SaveWorker(object obj)
         {
             if (_workerRepository.GetById(Id) == null)
+            {
                 _workerRepository.Create(_workerModel);
+                _loginRepository.Create(_loginModel);
+            }
             else
+            {
                 _workerRepository.Update(_workerModel);
+                _loginRepository.Update(_loginModel);
+            }
             CreateListView();
         }
 
-        private bool CanSaveWorker(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !HasErrors;
+        private bool CanSaveWorker(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()
@@ -279,6 +321,8 @@ namespace Hotellux.ViewModels
             OnPropertyChanged(nameof(DateOfBirth));
             OnPropertyChanged(nameof(Email));
             OnPropertyChanged(nameof(PhoneNumber));
+            OnPropertyChanged(nameof(Login));
+            OnPropertyChanged(nameof(Password));
             OnPropertyChanged(nameof(CreatedDate));
         }
         #endregion

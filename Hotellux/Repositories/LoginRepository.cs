@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using DataBase.DataModels;
 using Hotellux.Interfaces;
+using Hotellux.Tools.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,6 +43,6 @@ namespace Hotellux.Repositories
             context.SaveChanges();
         }
 
-        public LoginDataModel GetByLoginAndPassword(string login, string password) => GetAll().SingleOrDefault(x => x.Login == login && x.Password == password);
+        public LoginDataModel GetByLoginAndPassword(string login, string password) => GetAll().SingleOrDefault(x => x.Login == login && PasswordHasherHelper.Verify(password, x.Password));
     }
 }

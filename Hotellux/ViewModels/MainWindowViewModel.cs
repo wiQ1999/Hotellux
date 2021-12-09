@@ -1,5 +1,7 @@
-﻿using Hotellux.LoggedUser;
+﻿using DataBase.Enums;
+using Hotellux.LoggedUser;
 using Hotellux.Tools;
+using Hotellux.Tools.Helpers;
 using System;
 using System.Windows.Input;
 
@@ -26,6 +28,8 @@ namespace Hotellux.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ICommand OpenFolderCommand { get; set; }
         #endregion
 
         public MainWindowViewModel()
@@ -34,9 +38,7 @@ namespace Hotellux.ViewModels
             OpenFolderCommand = new RelayCommand(OpenFolder, CanOpenFolder);
         }
 
-        #region Commands
-        public ICommand OpenFolderCommand { get; set; }
-
+        #region Methods
         private void OpenFolder(object folderName)
         {
             switch (folderName.ToString())
@@ -59,7 +61,32 @@ namespace Hotellux.ViewModels
             OnPropertyChanged(nameof(ActiveViewModelName));
         }
 
-        private bool CanOpenFolder(object obj) => User.IsInitialized();
+        private bool CanOpenFolder(object folderName)
+        {
+            if (!User.IsInitialized())
+                return false;
+
+            if (_activeViewModel != null && _activeViewModel.ViewModelName == "Logowanie")
+            {
+                _activeViewModel = null;
+                OnPropertyChanged(nameof(ActiveViewModel));
+                OnPropertyChanged(nameof(UserName));
+            }
+
+            switch (folderName.ToString())
+            {
+                case "POKOJE":
+                    return User.Get.WorkerType == WorkerType.Manager || User.Get.WorkerType == WorkerType.Reception || User.Get.WorkerType == WorkerType.CleaningService;
+                case "KLIENCI":
+                    return User.Get.WorkerType == WorkerType.Manager || User.Get.WorkerType == WorkerType.Reception;
+                case "REZERWACJE":
+                    return User.Get.WorkerType == WorkerType.Manager || User.Get.WorkerType == WorkerType.Reception;
+                case "PRACOWNICY":
+                    return User.Get.WorkerType == WorkerType.Manager;
+            }
+
+            return true;
+        }
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DataBase.DataModels;
 using DataBase.Enums;
+using System;
 
 namespace Hotellux.LoggedUser
 {
@@ -29,7 +30,9 @@ namespace Hotellux.LoggedUser
         {
             if (IsInitialized())
                 return false;
+
             _instance = new User(worker);
+
             return true;
         }
 

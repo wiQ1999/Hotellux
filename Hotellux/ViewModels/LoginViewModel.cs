@@ -4,6 +4,7 @@ using Hotellux.Repositories;
 using Hotellux.Tools;
 using Hotellux.Tools.Helpers;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,11 +27,22 @@ namespace Hotellux.ViewModels
             set
             {
                 _passwordBlanc = new string('*', value.Length);
-                _passwordHashed = value;
+
+                if (string.IsNullOrEmpty(value))
+                    _passwordHashed = string.Empty;
+                else
+                {
+                    if (value.Length > _passwordHashed.Length)
+                        _passwordHashed += value.Last();
+                    else
+                        _passwordHashed = _passwordHashed.Remove(value.Length);
+                }
+                
             }
         }
 
         public ICommand LoginUserCommand { get; set; }
+
         #endregion
 
         public LoginViewModel()
@@ -41,9 +53,7 @@ namespace Hotellux.ViewModels
         #region Methods
         private void LoginUser(object obj)
         {
-            string hashedPassword = PasswordHasherHelper.Hash(_passwordHashed);
-
-            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, hashedPassword);
+            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, _passwordHashed);
 
             if (model == null)
                 MessageBox.Show("Niepoprawne dane logowania.");
@@ -54,7 +64,6 @@ namespace Hotellux.ViewModels
                     throw new Exception("Nie znaleziono modelu pracownika, błąd relacji 1-1");
 
                 User.Initialize(workerModel);
-                //zalogowanie
             }
         }
 

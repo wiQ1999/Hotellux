@@ -15,7 +15,7 @@ namespace Hotellux.ViewModels
         #region Properties
         private CustomerDataModel _customerModel = new();
         private CustomerRepository _customerRepository = new();
-        private int _selectedCustomerIndex;
+        private int _selectedCustomerIndex = -1;
         private string _selectedName;
         private string _selectedLastName;
 

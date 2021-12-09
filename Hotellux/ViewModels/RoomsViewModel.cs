@@ -15,7 +15,7 @@ namespace Hotellux.ViewModels
         #region Properties
         private RoomDataModel _roomModel = new();
         private RoomRepository _roomRepository = new();
-        private int _selectedRoomIndex;
+        private int _selectedRoomIndex = -1;
         private int? _selectedFloor;
         private int? _selectedCapacity;
 
