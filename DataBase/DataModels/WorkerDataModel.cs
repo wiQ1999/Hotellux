@@ -29,14 +29,14 @@ namespace DataBase.DataModels
         public string Email { get; set; }
 
         [MaxLength(15)]
-        public string PhonNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
 
         public override string ToString()
         {
-            return $"{Id}|{Name} {Lastname}|{Type}";
+            return $"{Name} {Lastname} - {Type}";
         }
     }
 }

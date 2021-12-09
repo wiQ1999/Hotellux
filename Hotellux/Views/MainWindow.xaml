@@ -21,11 +21,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1" Background="Aquamarine">
+        <Grid Grid.Column="1" Background="#53d4c0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="160"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Hotellux" FontSize="32" FontWeight="ExtraBold" />
 
             <StackPanel Grid.Row="1">
                 <Button Margin="10" Padding="5" Content="POKOJE" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="POKOJE" />
@@ -48,7 +50,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="1" CornerRadius="20, 0, 0, 20" Background="BurlyWood">
+                <Border Grid.Column="1" CornerRadius="20, 0, 0, 20" Background="#53d4c0">
                     <Grid>
                         <TextBlock Margin="20, 0, 0, 0" VerticalAlignment="Center" FontSize="18" Text="{Binding ActiveViewModelName}"/>
                         <TextBlock Margin="0, 0, 20, 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Text="{Binding UserName}"/>
