@@ -36,7 +36,7 @@ namespace Hotellux.ViewModels
                 _selectedWorkerIndex = value;
                 if (value < 0) return;
                 _workerModel = WorkersList[value];
-                _loginModel = _loginRepository.GetById(value + 1);
+                _loginModel = _loginRepository.GetById(_workerModel.Id);
                 _password = "?";
                 PropertyChangedAllFields();
             }
@@ -233,9 +233,11 @@ namespace Hotellux.ViewModels
 
         public ICommand ClearGenderFieldCommand { get; set; }
 
-        public ICommand NewRoomCommand { get; set; }
+        public ICommand DeleteWorkerCommand { get; set; }
 
-        public ICommand SaveRoomCommand { get; set; }
+        public ICommand NewWorkerCommand { get; set; }
+
+        public ICommand SaveWorkerCommand { get; set; }
         #endregion
         #endregion
 
@@ -245,8 +247,9 @@ namespace Hotellux.ViewModels
             ClearLastNameFilterCommand = new RelayCommand(ClearLastNameFilter);
             ClearTypeFilterCommand = new RelayCommand(ClearTypeFilter);
             ClearGenderFieldCommand = new RelayCommand(ClearGenderField);
-            NewRoomCommand = new RelayCommand(NewWorker);
-            SaveRoomCommand = new RelayCommand(SaveWorker, CanSaveWorker);
+            DeleteWorkerCommand = new RelayCommand(DeleteWorker, CanDeleteWorker);
+            NewWorkerCommand = new RelayCommand(NewWorker);
+            SaveWorkerCommand = new RelayCommand(SaveWorker, CanSaveWorker);
             NewWorker(null);
             CreateListView();
         }
@@ -282,14 +285,26 @@ namespace Hotellux.ViewModels
 
         private void ClearGenderField(object obj) => SelectedType = null;
 
+        private void DeleteWorker(object obj)
+        {
+            _loginRepository.Delete(_loginModel);
+            _workerRepository.Delete(_workerModel);
+            NewWorker(null);
+        }
+
+        private bool CanDeleteWorker(object obj) => _loginModel != null && _workerModel != null && _loginRepository.GetById(_loginModel.Id) != null && _workerRepository.GetById(_workerModel.Id) != null;
+
         private void NewWorker(object obj)
         {
-            _workerModel = new WorkerDataModel();
-            _workerModel.DateOfBirth = DateTime.Today.AddYears(-18);
+            _workerModel = new WorkerDataModel
+            {
+                DateOfBirth = DateTime.Today.AddYears(-18)
+            };
             _loginModel = new LoginDataModel();
             _password = "?";
             ClearAllErrors();
             PropertyChangedAllFields();
+            CreateListView();
         }
 
         private void SaveWorker(object obj)
@@ -297,6 +312,7 @@ namespace Hotellux.ViewModels
             if (_workerRepository.GetById(Id) == null)
             {
                 _workerRepository.Create(_workerModel);
+                _loginModel.WorkerId = _workerModel.Id;
                 _loginRepository.Create(_loginModel);
             }
             else

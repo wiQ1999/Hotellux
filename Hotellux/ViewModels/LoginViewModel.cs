@@ -55,6 +55,11 @@ namespace Hotellux.ViewModels
         {
             LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, _passwordClean);
 
+            _passwordBlanc = string.Empty;
+            _passwordClean = string.Empty;
+
+            OnPropertyChanged(nameof(Password));
+
             if (model == null)
                 MessageBox.Show("Niepoprawne dane logowania.");
             else

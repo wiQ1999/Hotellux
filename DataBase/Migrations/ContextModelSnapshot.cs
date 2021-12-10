@@ -489,6 +489,9 @@ namespace DataBase.Migrations
                     b.Property<int?>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -512,6 +515,9 @@ namespace DataBase.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Workers");
@@ -527,7 +533,8 @@ namespace DataBase.Migrations
                             Lastname = "Brzęczyszczykiewicz",
                             Name = "Jan",
                             PhoneNumber = "594291112",
-                            Type = 0
+                            Type = 0,
+                            TypeId = 0
                         },
                         new
                         {
@@ -539,7 +546,8 @@ namespace DataBase.Migrations
                             Lastname = "Mrozek",
                             Name = "Hanna",
                             PhoneNumber = "234965284",
-                            Type = 1
+                            Type = 1,
+                            TypeId = 0
                         },
                         new
                         {
@@ -550,7 +558,8 @@ namespace DataBase.Migrations
                             Lastname = "Nowak",
                             Name = "Paweł",
                             PhoneNumber = "110443785",
-                            Type = 2
+                            Type = 2,
+                            TypeId = 0
                         },
                         new
                         {
@@ -562,7 +571,8 @@ namespace DataBase.Migrations
                             Lastname = "Buda",
                             Name = "Aneta",
                             PhoneNumber = "924577646",
-                            Type = 2
+                            Type = 2,
+                            TypeId = 0
                         });
                 });
 
