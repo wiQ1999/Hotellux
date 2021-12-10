@@ -73,23 +73,39 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <ListView Grid.Column="0" Margin="0, 0, 10, 5" ItemsSource="{Binding CustomersList}" SelectedIndex="{Binding SelectedCustomerIndex}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Imię" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Lastname}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <ListView Grid.Column="1" Margin="10, 0, 0, 5" ItemsSource="{Binding RoomsList}" SelectedIndex="{Binding SelectedRoomIndex}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Numer" Width="45" DisplayMemberBinding="{Binding Number}" />
-                                    <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
-                                    <GridViewColumn Header="Cena" Width="70" DisplayMemberBinding="{Binding PricePerDay}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <Grid Grid.Column="0" Margin="0, 0, 10, 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Text="Klient:"/>
+                            <ListView Grid.Row="1" ItemsSource="{Binding CustomersList}" SelectedIndex="{Binding SelectedCustomerIndex}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Imię" Width="90" DisplayMemberBinding="{Binding Name}" />
+                                        <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Lastname}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="10, 0, 0, 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Pokój:"/>
+                            <ListView Grid.Row="1" ItemsSource="{Binding RoomsList}" SelectedIndex="{Binding SelectedRoomIndex}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Numer" Width="45" DisplayMemberBinding="{Binding Number}" />
+                                        <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
+                                        <GridViewColumn Header="Cena" Width="70" DisplayMemberBinding="{Binding PricePerDay}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -100,11 +116,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Ilość osób:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PersonCount}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PersonCount, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Opcja ze śniadaniem:"/>
-                            <CheckBox Margin="0, 2, 10, 0" IsChecked="{Binding WithBreakfast}"/>
+                            <CheckBox Margin="0, 2, 10, 0" IsChecked="{Binding WithBreakfast, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -116,11 +132,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Planowana data rozpoczęcia:"/>
-                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDatePlanned}"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDatePlanned, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Planowana data zakończenia:"/>
-                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDatePlanned}"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDatePlanned, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -132,11 +148,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Faktyczna data rozpoczęcia:"/>
-                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDateReal}"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDateReal, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Faktyczna data zakończenia:"/>
-                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDateReal}"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDateReal, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 

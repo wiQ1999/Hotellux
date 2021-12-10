@@ -74,6 +74,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
@@ -86,19 +87,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Aktywny:"/>
-                            <CheckBox Margin="0, 2, 10, 0" IsChecked="{Binding IsActive}"/>
+                            <CheckBox Margin="0, 2, 10, 0" IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Typ pracownika:"/>
-                            <!--<Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>-->
-                                
-                                <ComboBox Grid.Column="0" Margin="0, 2, 10, 0" ItemsSource="{Binding AllTypes}" SelectedItem="{Binding Type}"/>
-                                <!--<Button Grid.Column="1" Width="20" Content="X" Command="{Binding ClearTypeFilterCommand}"/>
-                            </Grid>-->
+                            <ComboBox Grid.Column="0" Margin="0, 2, 10, 0" ItemsSource="{Binding AllTypes}" SelectedItem="{Binding Type, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -110,11 +103,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Imię:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Name}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Nazwisko:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Lastname}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -132,13 +125,13 @@
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <ComboBox Margin="0, 2, 10, 0" ItemsSource="{Binding AllGenders}" SelectedItem="{Binding Gender}"/>
+                                <ComboBox Margin="0, 2, 10, 0" ItemsSource="{Binding AllGenders}" SelectedItem="{Binding Gender, UpdateSourceTrigger=PropertyChanged}"/>
                                 <Button Grid.Column="1" Width="20" Content="X" Command="{Binding ClearGenderFieldCommand}"/>
                             </Grid>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Data urodzenia:"/>
-                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding DateOfBirth}"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -150,11 +143,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Email:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Email}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Numer telefonu:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PhoneNumber}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -166,26 +159,31 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Login:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Login}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Hasło:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Password}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
-                    <Grid Grid.Row="5">
+                    <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Nowy pokój" Command="{Binding NewRoomCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Usuń pracownika" Command="{Binding DeleteWorkerCommand}"/>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Nowy pracownik" Command="{Binding NewWorkerCommand}"/>
                         </Grid>
 
-                        <Grid Grid.Column="1">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Zapisz pokój" Command="{Binding SaveRoomCommand}"/>
+                        <Grid Grid.Column="2">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz pracownik" Command="{Binding SaveWorkerCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>

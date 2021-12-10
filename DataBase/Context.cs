@@ -16,8 +16,8 @@ namespace DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
-            //optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
+            //optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,10 +34,10 @@ namespace DataBase
             
             #region Logins
             modelBuilder.Entity<LoginDataModel>().HasData(
-                new LoginDataModel { Id = 1, WorkerId = 1, Login = "Jan", Password = "Jan" },
-                new LoginDataModel { Id = 2, WorkerId = 2, Login = "Hanna", Password = "Hanna" },
-                new LoginDataModel { Id = 3, WorkerId = 3, Login = "Paweł", Password = "Paweł" },
-                new LoginDataModel { Id = 4, WorkerId = 4, Login = "Aneta", Password = "Aneta" }
+                new LoginDataModel { Id = 1, WorkerId = 1, Login = "Jan", Password = "$MYHASH$V1$10000$VZip5uHJd9AZkEGAd4sI2NrDhYyNlHk7Shxch3Oz2vp80thn" },
+                new LoginDataModel { Id = 2, WorkerId = 2, Login = "Hanna", Password = "$MYHASH$V1$10000$VZip5uHJd9AZkEGAd4sI2NrDhYyNlHk7Shxch3Oz2vp80thn" },
+                new LoginDataModel { Id = 3, WorkerId = 3, Login = "Paweł", Password = "$MYHASH$V1$10000$VZip5uHJd9AZkEGAd4sI2NrDhYyNlHk7Shxch3Oz2vp80thn" },
+                new LoginDataModel { Id = 4, WorkerId = 4, Login = "Aneta", Password = "$MYHASH$V1$10000$VZip5uHJd9AZkEGAd4sI2NrDhYyNlHk7Shxch3Oz2vp80thn" }
             );
             #endregion
             

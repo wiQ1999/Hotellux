@@ -77,11 +77,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Piętro:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Floor}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Numer:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Number}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -93,11 +93,11 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Wielkość:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Size}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Pojemność:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Capacity}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -109,7 +109,7 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Cena za dobę:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PricePerDay}"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PricePerDay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
@@ -120,7 +120,7 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Opis:"/>
-                            <TextBox Margin="0, 2, 0, 0" Height="60" Text="{Binding Description}"/>
+                            <TextBox Margin="0, 2, 0, 0" Height="60" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
 
