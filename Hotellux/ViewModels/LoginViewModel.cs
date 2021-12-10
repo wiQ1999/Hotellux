@@ -15,7 +15,7 @@ namespace Hotellux.ViewModels
         #region Properties
         private LoginRepository _loginRepository = new();
         private string _passwordBlanc = string.Empty;
-        private string _passwordHashed = string.Empty;
+        private string _passwordClean = string.Empty;
 
         public override string ViewModelName => "Logowanie";
 
@@ -29,13 +29,13 @@ namespace Hotellux.ViewModels
                 _passwordBlanc = new string('*', value.Length);
 
                 if (string.IsNullOrEmpty(value))
-                    _passwordHashed = string.Empty;
+                    _passwordClean = string.Empty;
                 else
                 {
-                    if (value.Length > _passwordHashed.Length)
-                        _passwordHashed += value.Last();
+                    if (value.Length > _passwordClean.Length)
+                        _passwordClean += value.Last();
                     else
-                        _passwordHashed = _passwordHashed.Remove(value.Length);
+                        _passwordClean = _passwordClean.Remove(value.Length);
                 }
                 
             }
@@ -53,7 +53,7 @@ namespace Hotellux.ViewModels
         #region Methods
         private void LoginUser(object obj)
         {
-            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, _passwordHashed);
+            LoginDataModel model = _loginRepository.GetByLoginAndPassword(Login, _passwordClean);
 
             if (model == null)
                 MessageBox.Show("Niepoprawne dane logowania.");
