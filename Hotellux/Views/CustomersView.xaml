@@ -101,14 +101,19 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Nowy pokój" Command="{Binding NewRoomCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Usuń klienta" Command="{Binding DeleteModelCommand}"/>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Nowy klient" Command="{Binding NewModelCommand}"/>
                         </Grid>
 
-                        <Grid Grid.Column="1">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="Zapisz pokój" Command="{Binding SaveRoomCommand}"/>
+                        <Grid Grid.Column="2">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz klienta" Command="{Binding SaveCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>

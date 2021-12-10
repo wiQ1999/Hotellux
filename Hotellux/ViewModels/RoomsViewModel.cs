@@ -154,18 +154,45 @@ namespace Hotellux.ViewModels
 
         public ICommand ClearCapacityFilterCommand { get; set; }
 
-        public ICommand NewRoomCommand { get; set; }
+        public ICommand DeleteModelCommand { get; set; }
 
-        public ICommand SaveRoomCommand { get; set; }
+        public ICommand NewModelCommand { get; set; }
+
+        public ICommand SaveCommand { get; set; }
         #endregion
         #endregion
+
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public RoomDataModel RoomDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Views.RoomsView RoomsView
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public RoomsViewModel()
         {
             ClearFloorFilterCommand = new RelayCommand(ClearFloorFilter);
             ClearCapacityFilterCommand = new RelayCommand(ClearCapacityFilter);
-            NewRoomCommand = new RelayCommand(NewRoom);
-            SaveRoomCommand = new RelayCommand(SaveRoom, CanSaveRoom);
+            DeleteModelCommand = new RelayCommand(DeleteModel, CanDeleteModel);
+            NewModelCommand = new RelayCommand(NewModel);
+            SaveCommand = new RelayCommand(SaveModel, CanSaveModel);
             CreateListView();
         }
 
@@ -194,14 +221,23 @@ namespace Hotellux.ViewModels
 
         private void ClearCapacityFilter(object obj) => SelectedCapacity = null;
 
-        private void NewRoom(object obj)
+        private void DeleteModel(object obj)
+        {
+            _roomRepository.Delete(_roomModel);
+            CreateListView();
+            NewModel(null);
+        }
+
+        private bool CanDeleteModel(object obj) => _roomModel != null && _roomRepository.GetById(_roomModel.Id) != null;
+
+        private void NewModel(object obj)
         {
             _roomModel = new RoomDataModel();
             ClearAllErrors();
             PropertyChangedAllFields();
         }
 
-        private void SaveRoom(object obj)
+        private void SaveModel(object obj)
         {
             if (_roomRepository.GetById(Id) == null)
                 _roomRepository.Create(_roomModel);
@@ -210,7 +246,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private bool CanSaveRoom(object obj) => !string.IsNullOrWhiteSpace(Number) && !HasErrors;
+        private bool CanSaveModel(object obj) => !string.IsNullOrWhiteSpace(Number) && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()

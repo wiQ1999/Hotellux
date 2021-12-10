@@ -16,8 +16,8 @@ namespace DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

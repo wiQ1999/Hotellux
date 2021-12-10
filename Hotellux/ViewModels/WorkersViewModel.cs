@@ -233,13 +233,45 @@ namespace Hotellux.ViewModels
 
         public ICommand ClearGenderFieldCommand { get; set; }
 
-        public ICommand DeleteWorkerCommand { get; set; }
+        public ICommand DeleteModelCommand { get; set; }
 
-        public ICommand NewWorkerCommand { get; set; }
+        public ICommand NewModelCommand { get; set; }
 
-        public ICommand SaveWorkerCommand { get; set; }
+        public ICommand SaveModelCommand { get; set; }
         #endregion
         #endregion
+
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public WorkerDataModel WorkerDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public LoginDataModel LoginDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Views.WorkersView WorkersView
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public WorkersViewModel()
         {
@@ -247,10 +279,10 @@ namespace Hotellux.ViewModels
             ClearLastNameFilterCommand = new RelayCommand(ClearLastNameFilter);
             ClearTypeFilterCommand = new RelayCommand(ClearTypeFilter);
             ClearGenderFieldCommand = new RelayCommand(ClearGenderField);
-            DeleteWorkerCommand = new RelayCommand(DeleteWorker, CanDeleteWorker);
-            NewWorkerCommand = new RelayCommand(NewWorker);
-            SaveWorkerCommand = new RelayCommand(SaveWorker, CanSaveWorker);
-            NewWorker(null);
+            DeleteModelCommand = new RelayCommand(DeleteModel, CanDeleteModel);
+            NewModelCommand = new RelayCommand(NewModel);
+            SaveModelCommand = new RelayCommand(SaveModel, CanSaveModel);
+            NewModel(null);
             CreateListView();
         }
 
@@ -285,16 +317,16 @@ namespace Hotellux.ViewModels
 
         private void ClearGenderField(object obj) => SelectedType = null;
 
-        private void DeleteWorker(object obj)
+        private void DeleteModel(object obj)
         {
             _loginRepository.Delete(_loginModel);
             _workerRepository.Delete(_workerModel);
-            NewWorker(null);
+            NewModel(null);
         }
 
-        private bool CanDeleteWorker(object obj) => _loginModel != null && _workerModel != null && _loginRepository.GetById(_loginModel.Id) != null && _workerRepository.GetById(_workerModel.Id) != null;
+        private bool CanDeleteModel(object obj) => _loginModel != null && _workerModel != null && _loginRepository.GetById(_loginModel.Id) != null && _workerRepository.GetById(_workerModel.Id) != null;
 
-        private void NewWorker(object obj)
+        private void NewModel(object obj)
         {
             _workerModel = new WorkerDataModel
             {
@@ -307,7 +339,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private void SaveWorker(object obj)
+        private void SaveModel(object obj)
         {
             if (_workerRepository.GetById(Id) == null)
             {
@@ -323,7 +355,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private bool CanSaveWorker(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && !HasErrors;
+        private bool CanSaveModel(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()

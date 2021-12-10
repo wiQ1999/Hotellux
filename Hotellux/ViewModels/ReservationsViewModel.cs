@@ -275,11 +275,53 @@ namespace Hotellux.ViewModels
 
         public ICommand ClearEndDatePlannedFilterCommand { get; set; }
 
-        public ICommand NewRoomCommand { get; set; }
+        public ICommand DeleteModelCommand { get; set; }
 
-        public ICommand SaveRoomCommand { get; set; }
+        public ICommand NewModelCommand { get; set; }
+
+        public ICommand SaveModelCommand { get; set; }
         #endregion
         #endregion
+
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public ReservationDataModel ReservationDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public CustomerDataModel CustomerDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public RoomDataModel RoomDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Views.ReservationsView ReservationsView
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public ReservationsViewModel()
         {
@@ -287,12 +329,13 @@ namespace Hotellux.ViewModels
             ClearPersonCountFilterCommand = new RelayCommand(ClearCapacityFilter);
             ClearStartDatePlannedFilterCommand = new RelayCommand(ClearStartDatePlannedFilter);
             ClearEndDatePlannedFilterCommand = new RelayCommand(ClearEndDatePlannedFilter);
-            NewRoomCommand = new RelayCommand(NewReservation);
-            SaveRoomCommand = new RelayCommand(SaveRoom, CanSaveRoom);
+            DeleteModelCommand = new RelayCommand(DeleteModel, CanDeleteModel);
+            NewModelCommand = new RelayCommand(NewModel);
+            SaveModelCommand = new RelayCommand(SaveModel, CanSaveModel);
             CreateReservationsListView();
             CustomersList = new ObservableCollection<CustomerDataModel>(_customerRepository.GetAll());
             RoomsList = new ObservableCollection<RoomDataModel>(_roomRepository.GetAll());
-            InitializeNewReservation();
+            NewModel(null);
         }
 
         #region Methods
@@ -322,15 +365,27 @@ namespace Hotellux.ViewModels
 
         private void ClearEndDatePlannedFilter(object obj) => SelectedEndDatePlanned = null;
 
-        private void NewReservation(object obj)
+        private void DeleteModel(object obj)
         {
-            InitializeNewReservation();
+            _reservationRepository.Delete(_reservationModel);
+            CreateReservationsListView();
+            NewModel(null);
+        }
+
+        private bool CanDeleteModel(object obj) => _reservationModel != null && _reservationRepository.GetById(_reservationModel.Id) != null;
+
+        private void NewModel(object obj)
+        {
+            _reservationModel = new ReservationDataModel();
+            _selectedReservationIndex = -1;
+            _selectedCustomerIndex = -1;
+            _selectedRoomIndex = -1;
             ClearAllErrors();
             PropertyChangedAllFields();
             CreateReservationsListView();
         }
 
-        private void SaveRoom(object obj)//validate!!! TODO
+        private void SaveModel(object obj)//validate!!! TODO
         {
             if (_reservationRepository.GetById(Id) == null)
                 _reservationRepository.Create(_reservationModel);
@@ -339,7 +394,7 @@ namespace Hotellux.ViewModels
             CreateReservationsListView();
         }
 
-        private bool CanSaveRoom(object obj) => PersonCount > 0 && !HasErrors;
+        private bool CanSaveModel(object obj) => PersonCount > 0 && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()
@@ -360,14 +415,6 @@ namespace Hotellux.ViewModels
             OnPropertyChanged(nameof(StartDateReal));
             OnPropertyChanged(nameof(EndDateReal));
             OnPropertyChanged(nameof(CreatedDate));
-        }
-
-        private void InitializeNewReservation()
-        {
-            _reservationModel = new ReservationDataModel();
-            _selectedReservationIndex = -1;
-            _selectedCustomerIndex = -1;
-            _selectedRoomIndex = -1;
         }
         #endregion
     }
