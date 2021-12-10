@@ -1,4 +1,5 @@
 ﻿using DataBase.DataModels;
+using DataBase.Enums;
 using System;
 
 namespace Hotellux.LoggedUser
@@ -8,15 +9,7 @@ namespace Hotellux.LoggedUser
         private static User _instance;
         private WorkerDataModel _workerModel;
 
-        public static User Get
-        {
-            get
-            {
-                if (_instance == null)
-                    throw new Exception("Missing initialization.");
-                return _instance;
-            }
-        }
+        public static User Get => _instance;
 
         public int Id => _workerModel.Id;
 
@@ -24,7 +17,9 @@ namespace Hotellux.LoggedUser
 
         public string Lastname => _workerModel.Lastname;
 
-        public string FullName => $"{Name} {Lastname}";
+        public string FullName => _workerModel.ToString();
+
+        public WorkerType WorkerType => _workerModel.Type;
 
         private User(WorkerDataModel worker)
         {
@@ -35,7 +30,9 @@ namespace Hotellux.LoggedUser
         {
             if (IsInitialized())
                 return false;
+
             _instance = new User(worker);
+
             return true;
         }
 

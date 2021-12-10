@@ -7,8 +7,46 @@
              StartupUri="Views\MainWindow.xaml">
 
     <Application.Resources>
+        
+        <!-- DODANIE WYGLĄDU WALIDATORA DO TEXTBOX'A -->
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <StackPanel>
+                                <AdornedElementPlaceholder x:Name="errorControl" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding AdornedElement.ToolTip, ElementName=errorControl}" Foreground="Red" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- WYŚWIETLANIE WSKAZANYCH WIDOKÓW -->
+        <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:RoomsViewModel}">
             <views:RoomsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CustomersViewModel}">
+            <views:CustomersView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ReservationsViewModel}">
+            <views:ReservationsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:WorkersViewModel}">
+            <views:WorkersView/>
+        </DataTemplate>
     </Application.Resources>
+    
 </Application>

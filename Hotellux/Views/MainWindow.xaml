@@ -3,8 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Hotellux.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="Hotellux" 
+        Height="600" Width="1200" 
+        MinHeight="600" MinWidth="1200"
+        Background="#e0e0e0">
+
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -13,17 +21,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1" Background="Aquamarine">
+        <Grid Grid.Column="1" Background="#53d4c0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="160"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Hotellux" FontSize="32" FontWeight="ExtraBold" />
+
             <StackPanel Grid.Row="1">
-                <Button Margin="10" Padding="5" Content="POKOJE" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="POKOJE"/>
-                <Button Margin="10" Padding="5" Content="KLINECI" FontSize="18"/>
-                <Button Margin="10" Padding="5" Content="REZERWACJE" FontSize="18"/>
-                <Button Margin="10" Padding="5" Content="PRACOWNICY" FontSize="18"/>
+                <Button Margin="10" Padding="5" Content="POKOJE" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="POKOJE" />
+                <Button Margin="10" Padding="5" Content="KLINECI" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="KLIENCI" />
+                <Button Margin="10" Padding="5" Content="REZERWACJE" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="REZERWACJE" />
+                <Button Margin="10" Padding="5" Content="PRACOWNICY" FontSize="18" Command="{Binding OpenFolderCommand}" CommandParameter="PRACOWNICY" />
             </StackPanel>
         </Grid>
 
@@ -40,10 +50,12 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="1" Background="BurlyWood">
-                    <TextBlock Margin="20, 0, 0, 0" VerticalAlignment="Center" FontSize="18" Text="{Binding ActiveViewModelName}"/>
-                    <TextBlock Margin="0, 0, 20, 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Text="{Binding UserName}"/>
-                </Grid>
+                <Border Grid.Column="1" CornerRadius="20, 0, 0, 20" Background="#53d4c0">
+                    <Grid>
+                        <TextBlock Margin="20, 0, 0, 0" VerticalAlignment="Center" FontSize="18" Text="{Binding ActiveViewModelName}"/>
+                        <TextBlock Margin="0, 0, 20, 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Text="{Binding UserName}"/>
+                    </Grid>
+                </Border>
             </Grid>
 
             <Border Grid.Row="2" Padding="20">

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Hotellux.Views.RoomsView"
+﻿<UserControl x:Class="Hotellux.Views.ReservationsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,9 +6,9 @@
              xmlns:viewModels="clr-namespace:Hotellux.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="900">
-
+    
     <UserControl.DataContext>
-        <viewModels:RoomsViewModel />
+        <viewModels:ReservationsViewModel />
     </UserControl.DataContext>
 
     <Border CornerRadius="30, 30, 30, 30" Background="LightGray">
@@ -27,31 +27,29 @@
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                         <StackPanel>
-                            <TextBlock Margin="10, 0, 5, 0" Text="Piętro:"/>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Data rozpoczęcia:"/>
                             <StackPanel Margin="5" Orientation="Horizontal">
-                                <ComboBox Width="100" ItemsSource="{Binding AllFloors}" SelectedItem="{Binding SelectedFloor}"/>
-                                <Button Width="20" Content="X" Command="{Binding ClearFloorFilterCommand}"/>
+                                <DatePicker Width="140" SelectedDate="{Binding SelectedStartDatePlanned}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearStartDatePlannedFilterCommand}"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel>
-                            <TextBlock Margin="10, 0, 5, 0" Text="Pojemność:"/>
+                            <TextBlock Margin="10, 0, 5, 0" Text="Data zakończenia:"/>
                             <StackPanel Margin="5" Orientation="Horizontal">
-                                <ComboBox Width="100" ItemsSource="{Binding AllCapacities}" SelectedItem="{Binding SelectedCapacity}"/>
-                                <Button Width="20" Content="X" Command="{Binding ClearCapacityFilterCommand}"/>
+                                <DatePicker Width="140" SelectedDate="{Binding SelectedEndDatePlanned}"/>
+                                <Button Width="20" Content="X" Command="{Binding ClearEndDatePlannedFilterCommand}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
 
-                    <ListView Grid.Row="1" ItemsSource="{Binding RoomsList}" SelectedIndex="{Binding SelectedRoomIndex}">
+                    <ListView Grid.Row="1" ItemsSource="{Binding ReservationsList}" SelectedIndex="{Binding SelectedReservationIndex}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                                <GridViewColumn Header="Piętro" Width="45" DisplayMemberBinding="{Binding Floor}" />
-                                <GridViewColumn Header="Numer pokoju" Width="90" DisplayMemberBinding="{Binding Number}" />
-                                <GridViewColumn Header="Wielkość m2" Width="80" DisplayMemberBinding="{Binding Size}" />
-                                <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
-                                <GridViewColumn Header="Cena za dobę" Width="100" DisplayMemberBinding="{Binding PricePerDay}" />
-                                <GridViewColumn Header="Opis" Width="250" DisplayMemberBinding="{Binding Description}" />
+                                <GridViewColumn Header="Plan. rozpoczęcie" Width="110" DisplayMemberBinding="{Binding StartDatePlanned}" />
+                                <GridViewColumn Header="Plan. zakończenie" Width="110" DisplayMemberBinding="{Binding EndDatePlanned}" />
+                                <GridViewColumn Header="Rozpoczęcie" Width="90" DisplayMemberBinding="{Binding StartDateReal}" />
+                                <GridViewColumn Header="Zakończenie" Width="90" DisplayMemberBinding="{Binding EndDateReal}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -61,10 +59,10 @@
             <Border Grid.Column="1" Margin="10 20 20 20">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="220"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="90"/>
                         <RowDefinition/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
@@ -75,14 +73,23 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Piętro:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Floor}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="Numer:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Number}"/>
-                        </StackPanel>
+                        <ListView Grid.Column="0" Margin="0, 0, 10, 5" ItemsSource="{Binding CustomersList}" SelectedIndex="{Binding SelectedCustomerIndex}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Imię" Width="90" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Nazwisko" Width="100" DisplayMemberBinding="{Binding Lastname}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <ListView Grid.Column="1" Margin="10, 0, 0, 5" ItemsSource="{Binding RoomsList}" SelectedIndex="{Binding SelectedRoomIndex}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Numer" Width="45" DisplayMemberBinding="{Binding Number}" />
+                                    <GridViewColumn Header="Pojemność" Width="70" DisplayMemberBinding="{Binding Capacity}" />
+                                    <GridViewColumn Header="Cena" Width="70" DisplayMemberBinding="{Binding PricePerDay}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -92,12 +99,12 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Wielkość:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Size}"/>
+                            <TextBlock Text="Ilość osób:"/>
+                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PersonCount}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="Pojemność:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding Capacity}"/>
+                            <TextBlock Text="Opcja ze śniadaniem:"/>
+                            <CheckBox Margin="0, 2, 10, 0" IsChecked="{Binding WithBreakfast}"/>
                         </StackPanel>
                     </Grid>
 
@@ -108,19 +115,28 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Cena za dobę:"/>
-                            <TextBox Margin="0, 2, 10, 0" Text="{Binding PricePerDay}"/>
+                            <TextBlock Text="Planowana data rozpoczęcia:"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDatePlanned}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Planowana data zakończenia:"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDatePlanned}"/>
                         </StackPanel>
                     </Grid>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="Opis:"/>
-                            <TextBox Margin="0, 2, 0, 0" Height="60" Text="{Binding Description}"/>
+                            <TextBlock Text="Faktyczna data rozpoczęcia:"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding StartDateReal}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Faktyczna data zakończenia:"/>
+                            <DatePicker Margin="0, 2, 10, 0" SelectedDate="{Binding EndDateReal}"/>
                         </StackPanel>
                     </Grid>
 

@@ -4,14 +4,16 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataBase.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20211205192017_CustomerColumnNameFix")]
+    partial class CustomerColumnNameFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -500,7 +502,7 @@ namespace DataBase.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("PhonNumber")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
@@ -526,7 +528,7 @@ namespace DataBase.Migrations
                             IsActive = true,
                             Lastname = "Brzęczyszczykiewicz",
                             Name = "Jan",
-                            PhoneNumber = "594291112",
+                            PhonNumber = "594291112",
                             Type = 0
                         },
                         new
@@ -538,7 +540,7 @@ namespace DataBase.Migrations
                             IsActive = true,
                             Lastname = "Mrozek",
                             Name = "Hanna",
-                            PhoneNumber = "234965284",
+                            PhonNumber = "234965284",
                             Type = 1
                         },
                         new
@@ -549,7 +551,7 @@ namespace DataBase.Migrations
                             IsActive = true,
                             Lastname = "Nowak",
                             Name = "Paweł",
-                            PhoneNumber = "110443785",
+                            PhonNumber = "110443785",
                             Type = 2
                         },
                         new
@@ -561,7 +563,7 @@ namespace DataBase.Migrations
                             IsActive = true,
                             Lastname = "Buda",
                             Name = "Aneta",
-                            PhoneNumber = "924577646",
+                            PhonNumber = "924577646",
                             Type = 2
                         });
                 });

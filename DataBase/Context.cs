@@ -16,8 +16,8 @@ namespace DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=Hotellux;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Server=.\MSSQLSERVER2019; Database=Hotellux;;User Id=sa; Password=Carton43;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,10 +25,10 @@ namespace DataBase
             
             #region Workers
             modelBuilder.Entity<WorkerDataModel>().HasData(
-                new WorkerDataModel { Id = 1, IsActive = true, Type = WorkerType.Manager, Name = "Jan", Lastname = "Brzęczyszczykiewicz", Gender = Gender.Male, DateOfBirth = new DateTime(1976, 4, 13), Email = "jan.brzęczyszczykiewicz@gmail.com", PhonNumber = "594291112" },
-                new WorkerDataModel { Id = 2, IsActive = true, Type = WorkerType.Reception, Name = "Hanna", Lastname = "Mrozek", Gender = Gender.Female, DateOfBirth = new DateTime(1988, 1, 19), Email = "hanna.mrozek@gmail.com", PhonNumber = "234965284" },
-                new WorkerDataModel { Id = 3, IsActive = true, Type = WorkerType.CleaningService, Name = "Paweł", Lastname = "Nowak", Gender = null, DateOfBirth = new DateTime(1992, 8, 2), Email = "pawel.nowak@gmail.com", PhonNumber = "110443785" },
-                new WorkerDataModel { Id = 4, IsActive = true, Type = WorkerType.CleaningService, Name = "Aneta", Lastname = "Buda", Gender = Gender.Female, DateOfBirth = new DateTime(1980, 12, 17), Email = "aneta.buda@gmail.com", PhonNumber = "924577646" }
+                new WorkerDataModel { Id = 1, IsActive = true, Type = WorkerType.Manager, Name = "Jan", Lastname = "Brzęczyszczykiewicz", Gender = Gender.Male, DateOfBirth = new DateTime(1976, 4, 13), Email = "jan.brzęczyszczykiewicz@gmail.com", PhoneNumber = "594291112" },
+                new WorkerDataModel { Id = 2, IsActive = true, Type = WorkerType.Reception, Name = "Hanna", Lastname = "Mrozek", Gender = Gender.Female, DateOfBirth = new DateTime(1988, 1, 19), Email = "hanna.mrozek@gmail.com", PhoneNumber = "234965284" },
+                new WorkerDataModel { Id = 3, IsActive = true, Type = WorkerType.CleaningService, Name = "Paweł", Lastname = "Nowak", Gender = null, DateOfBirth = new DateTime(1992, 8, 2), Email = "pawel.nowak@gmail.com", PhoneNumber = "110443785" },
+                new WorkerDataModel { Id = 4, IsActive = true, Type = WorkerType.CleaningService, Name = "Aneta", Lastname = "Buda", Gender = Gender.Female, DateOfBirth = new DateTime(1980, 12, 17), Email = "aneta.buda@gmail.com", PhoneNumber = "924577646" }
             );
             #endregion
             
