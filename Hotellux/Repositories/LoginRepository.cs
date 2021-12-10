@@ -9,6 +9,14 @@ namespace Hotellux.Repositories
 {
     public class LoginRepository : ICRUD<LoginDataModel>
     {
+        public ViewModels.LoginViewModel LoginViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void Create(LoginDataModel toCreate)
         {
             using var context = new Context();

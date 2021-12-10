@@ -32,6 +32,14 @@ namespace Hotellux.ViewModels
         public ICommand OpenFolderCommand { get; set; }
         #endregion
 
+        public MainWindow MainWindow
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public MainWindowViewModel()
         {
             _activeViewModel = new LoginViewModel();

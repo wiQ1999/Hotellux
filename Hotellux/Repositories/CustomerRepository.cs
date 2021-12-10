@@ -8,6 +8,14 @@ namespace Hotellux.Repositories
 {
     public class CustomerRepository : ICRUD<CustomerDataModel>
     {
+        public ViewModels.CustomersViewModel CustomersViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void Create(CustomerDataModel toCreate)
         {
             using var context = new Context();

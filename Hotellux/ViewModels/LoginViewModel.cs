@@ -45,6 +45,30 @@ namespace Hotellux.ViewModels
 
         #endregion
 
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public LoginDataModel LoginDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Views.LoginView LoginView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public LoginViewModel()
         {
             LoginUserCommand = new RelayCommand(LoginUser, CanLoginUser);

@@ -118,8 +118,8 @@ namespace Hotellux.ViewModels
                 if (value == _customerModel.PhoneNumber) return;
                 _customerModel.PhoneNumber = value;
                 ClearErrors();
-                if (string.IsNullOrWhiteSpace(value))
-                    AddError(nameof(PhoneNumber), "Wartość nie może być pusta.");
+                if (!value.ValidPhoneNumber())
+                    AddError(nameof(PhoneNumber), "Wartość nie jest numerem telefonu.");
                 OnPropertyChanged();
             }
         }
@@ -131,18 +131,45 @@ namespace Hotellux.ViewModels
 
         public ICommand ClearLastNameFilterCommand { get; set; }
 
-        public ICommand NewRoomCommand { get; set; }
+        public ICommand DeleteModelCommand { get; set; }
 
-        public ICommand SaveRoomCommand { get; set; }
+        public ICommand NewModelCommand { get; set; }
+
+        public ICommand SaveModelCommand { get; set; }
         #endregion
         #endregion
+
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public CustomerDataModel CustomerDataModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Views.CustomersView CustomersView
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public CustomersViewModel()
         {
             ClearNameFilterCommand = new RelayCommand(ClearNameFilter);
             ClearLastNameFilterCommand = new RelayCommand(ClearLastNameFilter);
-            NewRoomCommand = new RelayCommand(NewRoom);
-            SaveRoomCommand = new RelayCommand(SaveRoom, CanSaveRoom);
+            DeleteModelCommand = new RelayCommand(DeleteModel, CanDeleteModel);
+            NewModelCommand = new RelayCommand(NewModel);
+            SaveModelCommand = new RelayCommand(SaveModel, CanSaveModel);
             CreateListView();
         }
 
@@ -167,14 +194,23 @@ namespace Hotellux.ViewModels
 
         private void ClearLastNameFilter(object obj) => SelectedLastName = null;
 
-        private void NewRoom(object obj)
+        private void DeleteModel(object obj)
+        {
+            _customerRepository.Delete(_customerModel);
+            CreateListView();
+            NewModel(null);
+        }
+
+        private bool CanDeleteModel(object obj) => _customerModel != null && _customerRepository.GetById(_customerModel.Id) != null;
+
+        private void NewModel(object obj)
         {
             _customerModel = new CustomerDataModel();
             ClearAllErrors();
             PropertyChangedAllFields();
         }
 
-        private void SaveRoom(object obj)
+        private void SaveModel(object obj)
         {
             if (_customerRepository.GetById(Id) == null)
                 _customerRepository.Create(_customerModel);
@@ -183,7 +219,7 @@ namespace Hotellux.ViewModels
             CreateListView();
         }
 
-        private bool CanSaveRoom(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !HasErrors;
+        private bool CanSaveModel(object obj) => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Lastname) && !HasErrors;
         #endregion
 
         private void PropertyChangedAllFields()

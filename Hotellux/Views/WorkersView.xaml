@@ -175,15 +175,15 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Usuń pracownika" Command="{Binding DeleteWorkerCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Usuń pracownika" Command="{Binding DeleteModelCommand}"/>
                         </Grid>
                         
                         <Grid Grid.Column="1">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Nowy pracownik" Command="{Binding NewWorkerCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Nowy pracownik" Command="{Binding NewModelCommand}"/>
                         </Grid>
 
                         <Grid Grid.Column="2">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz pracownik" Command="{Binding SaveWorkerCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz pracownika" Command="{Binding SaveModelCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>
