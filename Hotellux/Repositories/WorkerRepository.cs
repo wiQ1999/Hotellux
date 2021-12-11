@@ -8,14 +8,6 @@ namespace Hotellux.Repositories
 {
     public class WorkerRepository : ICRUD<WorkerDataModel>
     {
-        public ViewModels.WorkersViewModel WorkersViewModel
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public void Create(WorkerDataModel toCreate)
         {
             using var context = new Context();

@@ -113,7 +113,7 @@
                         </Grid>
 
                         <Grid Grid.Column="2">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz klienta" Command="{Binding SaveCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz klienta" Command="{Binding SaveModelCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>
