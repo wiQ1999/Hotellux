@@ -173,7 +173,7 @@
                         </Grid>
 
                         <Grid Grid.Column="2">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz rezerwacje" Command="{Binding SaveCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="30" Content="Zapisz rezerwacje" Command="{Binding SaveModelCommand}"/>
                         </Grid>
                     </Grid>
                 </Grid>
